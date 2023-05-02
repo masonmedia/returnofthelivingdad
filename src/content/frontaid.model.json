@@ -1,1 +1,35 @@
-{}
+{
+    ":name": "Return of the Living Dad",
+    "name": {
+      ":description": "Website name",
+      ":type": "line"
+    },
+    "home_page": {
+      ":description": "Content for the Home page",
+      "title": {":type": "line"},
+      "text":  {":type": "text"}
+    },
+    "blog": {
+      ":description": "Blog posts",
+      ":items": {
+        "id": {":type": "line"},
+        "date": {":type": "line"},
+        "slug": {":type": "line"},
+        "imageUrl": {
+            ":type": "line"
+          },
+          "image": {
+            ":type": "image"
+          },
+          "categories": {
+            "cat1": {":type": "line"},
+            "cat2": {":type": "line"},
+            "cat3": {":type": "line"},
+            "cat4": {":type": "line"},
+            "cat5": {":type": "line"}
+          },
+        "title": {":type": "line"},
+        "body":  {":type": "text", ":richtext": true}
+        }
+      }
+    }
