@@ -1,5 +1,5 @@
 {
-    ":name": "Return of the Living Dad",
+    ":name": "Example Website",
     "name": {
       ":description": "Website name",
       ":type": "line"
