@@ -28,6 +28,13 @@
             "cat4": {":type": "line"},
             "cat5": {":type": "line"}
           },
+          "tags": {
+            ":items": {
+                "category": {
+                    ":type": "line"
+                }
+            }
+        },
         "title": {":type": "line"},
         "body":  {":type": "text", ":richtext": true}
         }
