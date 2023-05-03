@@ -22,7 +22,15 @@ const router = createRouter({
       name: 'Post',
       component: () => import('../views/DetailView.vue')
     }
-  ]
+  ],
+  scrollBehavior() {
+    return new Promise((resolve) => {
+      // resolve({ left: 0, top: 0 })
+      setTimeout(() => {
+        resolve({ left: 0, top: 0 })
+      }, 200)
+    })
+  },
 })
 
 export default router
