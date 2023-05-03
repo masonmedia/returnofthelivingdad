@@ -2,14 +2,15 @@
 
 import { ref, computed } from 'vue';
 import { useRoute } from 'vue-router';
-import posts from '../data/data.json'
+// import posts from '../data/data.json'
+import posts from '../content/frontaid.content.json'
 
 const route = useRoute();
 
 const postId = parseInt(route.params.id)
 
 const post = computed(() => {
-  return posts.find(post => post.id === postId)
+  return posts.blog.find(post => post.id == route.params.id)
 })
 
 // const post = ref({});
@@ -27,11 +28,39 @@ const post = computed(() => {
 
 <template>
   <div class="container-fluid">
-    <div class="row">
-      <div class="col-lg-12">
-         <h1>{{ post.title }}</h1>
-         <p>{{ post.body }}</p>
+    <div class="row min-vh-100 text-secondary">
+      <div class="col-lg-6 d-flex flex-column justify-content-center align-items-center p-5">
+        <h5 class="fs-5 lh-1 mb-0">Return of the Living Dad</h5>
+         <h1 class="display-3 fw-900 lh-1 ls-1 my-3 text-dark">{{ post.title }}</h1>
+         <p class="lh-1 mb-1">Written by <span class="fw-bold">Andrew Mason</span></p>
+         <p class="lh-1">On <span class="fw-bold">{{ post.date }}</span></p>
+         <div class="d-flex">
+          <span class="badge text-bg-secondary me-1" v-for="(tag, index) in post.tags" :key="index">{{ tag.category }}</span>
+         </div>
+       </div>
+       
+      <div class="col-lg-6 p-0" style="min-height: 50vh;">
+         <img :src="post.imageUrl" class="w-100 h-100" style="object-fit: cover;" alt="" />
+       </div>
+       </div>
+
+       <div class="container">
+        <div class="row py-5">
+          <div class="col-lg-3 text-end px-4">
+            <p><span class="fw-bold">Return of the Living Dad</span> is a parenting blog by Designer, Frontend Developer, Musician, and Dad, Andrew Mason. It began out of a need to communicate the pure, destruction waged on the core of my being from two small, difficult humans. It grew to be a format for me to offer real, genuine perspective on parenting when it isn't glossy, isn't glamorous, and isn't at all what the internet says it should be.</p>
+          </div>
+          <div class="col-lg-9">
+         <h1 class="fw-bold mb-3">{{ post.title }}</h1>
+         <p class="fs-5" v-html="post.body"></p>
        </div>
     </div>
   </div>
+       
+  </div>
 </template>
+
+<style scoped>
+  h3 {
+    margin: 20px 0;
+  }
+</style>
