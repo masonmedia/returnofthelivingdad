@@ -30,6 +30,7 @@ const post = computed(() => {
 //   return str.split(/\s+/).length;
 // }
 
+// my code
 function wordCount(str) {
   // return str.match(/(\w+)/g).length;
   const words = str.match(/(\w+)/g).length;
@@ -37,11 +38,25 @@ function wordCount(str) {
   return readMins;
 }
 
+// AI code
 function readingTime(str) {
   const wpm = 250;
   const words = str.trim().split(/\s+/).length;
   const time = Math.ceil(words / wpm);
   return time;
+}
+
+// fb share btn
+const fbShare = "https://www.facebook.com/sharer/sharer.php?u=";
+const url = window.location.href.slice(7);
+const shareButton = fbShare + url;
+
+// twitter share btn
+function tweetCurrentPage(title) {
+  const twShare = "https://twitter.com/share?url=";
+  const url = encodeURIComponent(window.location.href.slice(7));
+  const twShareButton = twShare + url + '&text=' + title;
+  return twShareButton;
 }
 
 </script>
@@ -94,7 +109,25 @@ function readingTime(str) {
             <h5 class="h6 fw-bold text-secondary border-bottom pb-4 mb-4">{{ 'Estimated read time ' + readingTime(post.body + post.title) + ' mins' }}</h5>
             <!-- <h5 class="mb-3 text-secondary fst-italic">{{ 'Estimated read time ' + wordCount(post.body) + ' mins' }}</h5> -->
             <p class="fs-5" v-html="post.body"></p>
+            <div class=" d-flex py-3 mt-4 border-top">
+              <a :href="shareButton" target="_blank">
+                <button class="btn btn-outline-dark p-2 fw-900 fs-5 me-2" style="width: 50px; height: 50px; border-radius: 50%">
+                  f
+                </button>
+              </a>
+              <a :href="tweetCurrentPage(post.title)" target="_blank" alt="Tweet this page">
+                <button class="btn btn-outline-dark p-2 fw-900 fs-5" style="width: 50px; height: 50px; border-radius: 50%">
+                  t
+                </button>
+              </a>
+            </div>
           </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12 p-5">
+        <h2>More</h2>
+      </div>
     </div>
   </div>
        
