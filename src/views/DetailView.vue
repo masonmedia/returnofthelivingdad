@@ -24,6 +24,26 @@ const post = computed(() => {
 
 //   getPostDetail();
 
+// get word count
+
+// function countWords(str) {
+//   return str.split(/\s+/).length;
+// }
+
+function wordCount(str) {
+  // return str.match(/(\w+)/g).length;
+  const words = str.match(/(\w+)/g).length;
+  const readMins = Math.trunc(words / 250);
+  return readMins;
+}
+
+function readingTime(str) {
+  const wpm = 250;
+  const words = str.trim().split(/\s+/).length;
+  const time = Math.ceil(words / wpm);
+  return time;
+}
+
 </script>
 
 <template>
@@ -48,7 +68,7 @@ const post = computed(() => {
         <div class="row py-5">
           <!-- sidebar -->
           <div class="col-lg-3 text-end px-4 pb-3 mb-4">
-            <div class="row">
+            <div class="row sidebar">
               <div class="col-sm-12">
                 <p><span class="fw-bold">Return of the Living Dad</span> is a parenting blog by Designer, Frontend Developer, Musician, and Dad, Andrew Mason. It began out of a need to communicate the pure, destruction waged on the core of my being from two small, difficult humans. It grew to be a format for me to offer real, genuine perspective on parenting when it isn't glossy, isn't glamorous, and isn't at all what the internet says it should be.</p>
               </div>
@@ -66,11 +86,13 @@ const post = computed(() => {
                 </div>
               </div>
             </div>
-            
           </div>
 
+          <!-- post body -->
           <div class="col-lg-9">
-            <h1 class="fw-900 lh-1 ls-1 mb-3">{{ post.title }}</h1>
+            <h1 class="display-4 fw-900 lh-1 ls-1 mb-3">{{ post.title }}</h1>
+            <h5 class="h6 fw-bold text-secondary border-bottom pb-4 mb-4">{{ 'Estimated read time ' + readingTime(post.body + post.title) + ' mins' }}</h5>
+            <!-- <h5 class="mb-3 text-secondary fst-italic">{{ 'Estimated read time ' + wordCount(post.body) + ' mins' }}</h5> -->
             <p class="fs-5" v-html="post.body"></p>
           </div>
     </div>
@@ -83,4 +105,11 @@ const post = computed(() => {
   h3 {
     margin: 20px 0;
   }
+
+.sidebar {
+  position: sticky;
+  top: 6rem;
+  max-height: calc(100vh - 9rem);
+  overflow-y: auto;
+}
 </style>
