@@ -17,6 +17,12 @@ const post = computed(() => {
   return posts.blog.find(post => post.id === route.params.id)
 })
 
+const currentItemIndex = ref(0);
+
+const nextItem = computed(() => {
+  return posts.blog[currentItemIndex.value + 1]
+})
+
 // const post = ref({});
 
 // const base_url = "https://jsonplaceholder.typicode.com/posts/";
@@ -78,7 +84,7 @@ function tweetCurrentPage(title) {
       <div class="col-lg-6 p-0" style="min-height: 50vh;">
          <TransitionGroup name="fade">
             <!-- <div :key="1" @load="loadImage" v-show="!isLoaded" class="placeholder placeholder-lg col-12 object-fit"></div> -->
-            <img :key="1" @load="loadImage" v-show="!isLoaded" class="fade-in bg-secondary w-100 h-100 object-fit" :src="`https://placehold.co/1000x400?text=${post.title}`" :alt="post.title">
+            <img :key="1" @load="loadImage" v-show="!isLoaded" class="fade-in bg-secondary w-100 h-100 object-fit" src="https://placehold.co/600x400?text=ROTLD" :alt="post.title">
             <img :key="2" @load="loadImage" v-show="isLoaded" class="fade-in w-100 h-100 object-fit" :src="post.imageUrl" :alt="post.title">
         </TransitionGroup>
         </div>
@@ -115,9 +121,11 @@ function tweetCurrentPage(title) {
             <p class="fs-5" v-html="post.body"></p>
             <!-- prev/next -->
             <div class="d-flex my-4">
-              <button v-if="post.id && post.id >= 0" @click="router.push('/blog/' + --post.id)" class="btn btn-outline-dark me-2">Prev</button>
-              <button v-if="post.id" @click="router.push('/blog/' + ++post.id)" class="btn btn-outline-dark me-2">Next</button>
+              <button v-if="post.id" @click="router.push('/blog/' + --route.params.id)" :class="post.id == 0 ? 'd-none' : ''" class="btn btn-outline-dark me-2">Prev</button>
+
+              <button v-if="post.id" :class="post.id == posts.blog[0].id ? 'd-none' : ''" @click="router.push('/blog/' + ++route.params.id)" class="btn btn-outline-dark me-2">Next</button>
             </div>
+            <!-- <p>{{ nextItem.title }}</p> -->
             <!-- share -->
             <div class=" d-flex py-4 mt-4 border-top">
               <a :href="shareButton" target="_blank">

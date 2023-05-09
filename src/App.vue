@@ -12,8 +12,8 @@ const route = useRoute();
   </header>
 
   <router-view v-slot="{ Component }">
-    <transition 
-    name="slide-fade"
+    <Transition 
+    name="fade"
     mode="out-in">
     <!-- <transition 
     mode="out-in"
@@ -21,7 +21,7 @@ const route = useRoute();
     @enter="enter"
     @leave="leave"> -->
       <component :is="Component" :key="route.fullPath" />
-    </transition>
+    </Transition>
   </router-view>
 </template>
 
