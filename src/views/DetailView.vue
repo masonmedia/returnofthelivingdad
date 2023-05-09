@@ -99,7 +99,7 @@ function tweetCurrentPage(title) {
                 <p><span class="fw-bold">Return of the Living Dad</span> is a parenting blog by Designer, Frontend Developer, Musician, and Dad, Andrew Mason. It began out of a need to communicate the pure, destruction waged on the core of my being from two small, difficult humans. It grew to be a format for me to offer real, genuine perspective on parenting when it isn't glossy, isn't glamorous, and isn't at all what the internet says it should be.</p>
               </div>
               <hr class="my-3">
-              <div class="col-sm-12 p-3 border-bottom" v-for="(item, index) in posts.blog.slice(0,2)" :key="index">
+              <div class="col-sm-12 p-3 border-bottom" v-for="(item, index) in posts.blog.slice(0,3)" :key="index">
                 <div class="pb-3">
                   <h3 class="fw-bold m-0" style="letter-spacing: -1px;">{{ item.title }}</h3>
                   <p class="mb-3 text-secondary">{{ item.date }}</p>
@@ -142,11 +142,11 @@ function tweetCurrentPage(title) {
           </div>
     </div>
 
-    <div class="row">
+    <!-- <div class="row">
       <div class="col-sm-12 p-5">
         <h2>More</h2>
       </div>
-    </div>
+    </div> -->
   </div>
        
   </div>
