@@ -1,6 +1,8 @@
 <script setup>
 // import posts from '../data/data.json'
 import posts from '../content/frontaid.content.json'
+import useImageLoader from '../stores/useImageLoader';
+const { isLoaded, loadImage } = useImageLoader();
 
 // image paths
 function getImageUrl(name, ext) {
@@ -45,18 +47,19 @@ function popped(arr) {
 
         <div class="row min-vh-100 bg-light shadow m-3">
           <div class="col-lg-6 p-0">
-            <img :src="posts.blog.slice(-1)[0].imageUrl" class="w-100 h-100 object-fit shadow" alt="">
+            <img :src="posts.blog.slice(-1)[0].imageUrl" class="w-100 h-100 object-fit" alt="">
           </div>
           <div class="col-lg-6 d-flex my-auto">
               <div class="p-5" style="min-height: 300px;">
                 <img style="width: 150px;" :src="getImageUrl('splatter', 'png')" alt="">
                 <h5>{{ posts.blog.slice(-1)[0].date }}</h5>
                 <h2 class="display-2 ls-1 fw-900 text-uppercase">{{ posts.blog.slice(-1)[0].title }}</h2>
-                <p class="h5 fw-bold text-secondary my-4" v-html="posts.blog.slice(-1)[0].body + '...'"></p>
+                <p class="h5 fw-bold text-secondary my-4" v-html="posts.blog.slice(-1)[0].body.substr(0,320) + '...'"></p>
                 <router-link :to="'/blog/' + posts.blog.slice(-1)[0].id">
                   <button class="btn btn-outline-dark px-4">More</button>
                 </router-link>
               </div>
+
           </div>
         </div>
       </section>
@@ -66,8 +69,13 @@ function popped(arr) {
           <!-- latest -->
           <h2 class="display-2 fw-bold lh-1 ls-1 border-bottom border-dark my-4 p-2 pb-4">Latest</h2>
           <div class="col-lg-4 p-0" v-for="(post, index) in posts.blog" :key="index">
-            <div class="m-2 bg-dark text-light rounded-3 shadow" v-if="post.id != 0">
-              <img :src="post.imageUrl" class="w-100" alt="">
+            
+            <div class="m-2 bg-dark text-light rounded-3 shadow" v-if="post.id != 0" >
+              <TransitionGroup name="fade">
+                <div :key="1" @load="loadImage" v-show="!isLoaded" class="w-100 bg-secondary" style="min-height: 200px"></div>
+                <img :key="2" @load="loadImage" v-show="isLoaded" :src="post.imageUrl" class="w-100" alt="" >
+              </TransitionGroup>
+              
               <div class="p-5" style="min-height: 350px;">
                 <h5>{{ post.date }}</h5>
                 <h2>{{ post.title }}</h2>
@@ -77,6 +85,7 @@ function popped(arr) {
                 </router-link>
               </div>
             </div>
+
           </div>
         </div>
       </section>

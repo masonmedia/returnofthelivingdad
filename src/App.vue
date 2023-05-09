@@ -1,6 +1,7 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+import { useRoute, RouterView } from 'vue-router'
 import Nav from './components/TheNav.vue'
+const route = useRoute();
 </script>
 
 <template>
@@ -19,7 +20,7 @@ import Nav from './components/TheNav.vue'
     @before-enter="beforeEnter"
     @enter="enter"
     @leave="leave"> -->
-      <component :is="Component" />
+      <component :is="Component" :key="route.fullPath" />
     </transition>
   </router-view>
 </template>

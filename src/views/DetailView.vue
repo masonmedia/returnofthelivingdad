@@ -1,11 +1,15 @@
 <script setup>
 
 import { ref, computed } from 'vue';
-import { useRoute } from 'vue-router';
-// import posts from '../data/data.json'
+import { useRoute, useRouter } from 'vue-router';
+import useImageLoader from '../stores/useImageLoader'
+// check image loaded
+const { isLoaded, loadImage } = useImageLoader();
+
 import posts from '../content/frontaid.content.json'
 
 const route = useRoute();
+const router = useRouter();
 
 // const postId = parseInt(route.params.id)
 
@@ -26,13 +30,8 @@ const post = computed(() => {
 
 // get word count
 
-// function countWords(str) {
-//   return str.split(/\s+/).length;
-// }
-
 // my code
 function wordCount(str) {
-  // return str.match(/(\w+)/g).length;
   const words = str.match(/(\w+)/g).length;
   const readMins = Math.trunc(words / 250);
   return readMins;
@@ -45,6 +44,8 @@ function readingTime(str) {
   const time = Math.ceil(words / wpm);
   return time;
 }
+
+// prev/next
 
 // fb share btn
 const fbShare = "https://www.facebook.com/sharer/sharer.php?u=";
@@ -75,8 +76,11 @@ function tweetCurrentPage(title) {
        </div>
        
       <div class="col-lg-6 p-0" style="min-height: 50vh;">
-         <img :src="post.imageUrl" class="w-100 h-100" style="object-fit: cover;" alt="" />
-       </div>
+         <TransitionGroup name="fade">
+            <div :key="1" @load="loadImage" v-show="!isLoaded" class="placeholder placeholder-lg col-12 object-fit"></div>
+            <img :key="2" @load="loadImage" v-show="isLoaded" class="fade-in w-100 h-100 object-fit" :src="post.imageUrl" :alt="post.title">
+        </TransitionGroup>
+        </div>
       </div>
 
        <div class="container">
@@ -106,9 +110,18 @@ function tweetCurrentPage(title) {
           <!-- post body -->
           <div class="col-lg-9">
             <h1 class="display-4 fw-900 lh-1 ls-1 mb-3">{{ post.title }}</h1>
-            <h5 class="h6 fw-bold text-secondary border-bottom pb-4 mb-4">{{ 'Estimated read time ' + readingTime(post.body + post.title) + ' mins' }}</h5>
-            <!-- <h5 class="mb-3 text-secondary fst-italic">{{ 'Estimated read time ' + wordCount(post.body) + ' mins' }}</h5> -->
+            <!-- <h5 class="h6 fw-bold text-secondary border-bottom pb-4 mb-4">{{ 'Estimated read time ' + readingTime(post.body + post.title) + ' mins' }}</h5> -->
+            <h5 v-if="wordCount(post.body) <= 1" class="h6 fw-bold text-secondary border-bottom pb-4 mb-4">{{ 'Estimated read time ' + wordCount(post.body) + ' min' }}</h5>
+            <h5 v-else class="h6 fw-bold text-secondary border-bottom pb-4 mb-4">{{ 'Estimated read time ' + wordCount(post.body) + ' mins' }}</h5>
             <p class="fs-5" v-html="post.body"></p>
+            <!-- prev/next -->
+            <div class="d-flex">
+              <!-- <router-link :to="'/blog/' + --post.id">prev</router-link> -->
+              <!-- <router-link v-if="post.id" :to="'/blog/' + ++post.id">next</router-link> -->
+              <button v-if="post.id && post.id >= 0" @click="router.push('/blog/' + --post.id)" class="btn btn-outline-dark me-2">Prev</button>
+              <button v-if="post.id" @click="router.push('/blog/' + ++post.id)" class="btn btn-outline-dark me-2">Next</button>
+            </div>
+            <!-- share -->
             <div class=" d-flex py-3 mt-4 border-top">
               <a :href="shareButton" target="_blank">
                 <button class="btn btn-outline-dark p-2 fw-900 fs-5 me-2" style="width: 50px; height: 50px; border-radius: 50%">
