@@ -9,8 +9,9 @@ function getImageUrl(name, ext) {
   return new URL(`../assets/img/${name}.${ext}`, import.meta.url).href
 }
 
-function popped(arr) {
-  return arr.pop();
+// reduce length of string to closest full word
+function shorten(text, max) {
+  return text && text.length > max ? text.slice(0, max).split(' ').slice(0, -1).join(' ') : text
 }
 </script>
 
@@ -70,16 +71,17 @@ function popped(arr) {
           <h2 class="display-2 fw-bold lh-1 ls-1 border-bottom border-dark my-4 p-2 pb-4">Latest</h2>
           <div class="col-lg-4 p-0" v-for="(post, index) in posts.blog" :key="index">
             
-            <div class="m-2 bg-dark text-light rounded-3 shadow" v-if="post.id != 0" >
+            <div class="m-2 bg-dark text-light rounded-3 shadow position-relative" v-if="post.id != 0" >
               <TransitionGroup name="fade">
-                <div :key="1" @load="loadImage" v-show="!isLoaded" class="w-100 bg-secondary" style="min-height: 200px"></div>
-                <img :key="2" @load="loadImage" v-show="isLoaded" :src="post.imageUrl" class="w-100" alt="" >
+                <!-- <div :key="1" @load="loadImage" v-show="!isLoaded" class="w-100 bg-secondary" style="min-height: 200px"></div> -->
+                <img :key="1" @load="loadImage" v-if="!isLoaded" class="fade-in bg-secondary w-100 position-absolute start-0 top-0" src="https://placehold.co/1000x400?text=ROTLD" :alt="post.title">
+                <img :key="2" @load="loadImage" v-if="isLoaded" :src="post.imageUrl" class="fade-in w-100" :alt="post.title" >
               </TransitionGroup>
               
-              <div class="p-5" style="min-height: 350px;">
+              <div class="p-5" style="min-height: 360px;">
                 <h5>{{ post.date }}</h5>
                 <h2>{{ post.title }}</h2>
-                <p v-html="post.body.slice(0,175) + '...'"></p>
+                <p v-html="shorten(post.body, 175) + '...'"></p>
                 <router-link :to="'/blog/' + post.id">
                   <button class="btn btn-outline-light">More</button>
                 </router-link>

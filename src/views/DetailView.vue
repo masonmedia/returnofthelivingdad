@@ -77,7 +77,8 @@ function tweetCurrentPage(title) {
        
       <div class="col-lg-6 p-0" style="min-height: 50vh;">
          <TransitionGroup name="fade">
-            <div :key="1" @load="loadImage" v-show="!isLoaded" class="placeholder placeholder-lg col-12 object-fit"></div>
+            <!-- <div :key="1" @load="loadImage" v-show="!isLoaded" class="placeholder placeholder-lg col-12 object-fit"></div> -->
+            <img :key="1" @load="loadImage" v-show="!isLoaded" class="fade-in bg-secondary w-100 h-100 object-fit" :src="`https://placehold.co/1000x400?text=${post.title}`" :alt="post.title">
             <img :key="2" @load="loadImage" v-show="isLoaded" class="fade-in w-100 h-100 object-fit" :src="post.imageUrl" :alt="post.title">
         </TransitionGroup>
         </div>
@@ -86,14 +87,12 @@ function tweetCurrentPage(title) {
        <div class="container">
         <div class="row py-5">
           <!-- sidebar -->
-          <div class="col-lg-3 text-end px-4 pb-3 mb-4">
+          <div class="col-lg-3 text-end px-4 pb-3 mb-4 order-2 order-lg-1">
             <div class="row sidebar">
               <div class="col-sm-12">
                 <p><span class="fw-bold">Return of the Living Dad</span> is a parenting blog by Designer, Frontend Developer, Musician, and Dad, Andrew Mason. It began out of a need to communicate the pure, destruction waged on the core of my being from two small, difficult humans. It grew to be a format for me to offer real, genuine perspective on parenting when it isn't glossy, isn't glamorous, and isn't at all what the internet says it should be.</p>
               </div>
-              
               <hr class="my-3">
-
               <div class="col-sm-12 p-3 border-bottom" v-for="(item, index) in posts.blog.slice(0,2)" :key="index">
                 <div class="pb-3">
                   <h3 class="fw-bold m-0" style="letter-spacing: -1px;">{{ item.title }}</h3>
@@ -108,21 +107,19 @@ function tweetCurrentPage(title) {
           </div>
 
           <!-- post body -->
-          <div class="col-lg-9">
+          <div class="col-lg-9 px-4 order-1 order-lg-2">
             <h1 class="display-4 fw-900 lh-1 ls-1 mb-3">{{ post.title }}</h1>
             <!-- <h5 class="h6 fw-bold text-secondary border-bottom pb-4 mb-4">{{ 'Estimated read time ' + readingTime(post.body + post.title) + ' mins' }}</h5> -->
             <h5 v-if="wordCount(post.body) <= 1" class="h6 fw-bold text-secondary border-bottom pb-4 mb-4">{{ 'Estimated read time ' + wordCount(post.body) + ' min' }}</h5>
             <h5 v-else class="h6 fw-bold text-secondary border-bottom pb-4 mb-4">{{ 'Estimated read time ' + wordCount(post.body) + ' mins' }}</h5>
             <p class="fs-5" v-html="post.body"></p>
             <!-- prev/next -->
-            <div class="d-flex">
-              <!-- <router-link :to="'/blog/' + --post.id">prev</router-link> -->
-              <!-- <router-link v-if="post.id" :to="'/blog/' + ++post.id">next</router-link> -->
+            <div class="d-flex my-4">
               <button v-if="post.id && post.id >= 0" @click="router.push('/blog/' + --post.id)" class="btn btn-outline-dark me-2">Prev</button>
               <button v-if="post.id" @click="router.push('/blog/' + ++post.id)" class="btn btn-outline-dark me-2">Next</button>
             </div>
             <!-- share -->
-            <div class=" d-flex py-3 mt-4 border-top">
+            <div class=" d-flex py-4 mt-4 border-top">
               <a :href="shareButton" target="_blank">
                 <button class="btn btn-outline-dark p-2 fw-900 fs-5 me-2" style="width: 50px; height: 50px; border-radius: 50%">
                   f

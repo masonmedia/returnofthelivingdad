@@ -10,12 +10,15 @@
   opacity: 0;
 }
 
+/* ensure leaving items are taken out of layout flow so that moving
+   animations can be calculated correctly. */
 .fade-leave-active {
   position: absolute;
 }
 
 // slide fade
 
+.slide-fade-move,
 .slide-fade-enter-active,
 .slide-fade-leave-active {
   transition: all 0.8s ease-in-out;
@@ -26,6 +29,12 @@
   transform: translateY(80px);
   opacity: 0;
 }
+
+/* ensure leaving items are taken out of layout flow so that moving
+   animations can be calculated correctly. */
+   .slide-fade-leave-active {
+    position: absolute;
+  }
 
 // h1 nested animation
 
