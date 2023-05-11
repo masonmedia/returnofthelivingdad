@@ -1,7 +1,7 @@
 <template>
     <div class="w-100">
         <div class="container-fluid px-0 pt-0 text-secondary w-100 d-lg-none d-flex position-relative z-1">
-            <router-link class="font-antonio fw-bold p-3 fs-2" to="/">ROTLD</router-link>
+            <router-link class="font-antonio fw-bold ls-base p-3 fs-2" to="/">ROTLD</router-link>
             <!-- menu -->
             <button class="btn ms-auto my-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasResponsive" aria-controls="offcanvasResponsive">
                 <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-justify-right" viewBox="0 0 16 16">
@@ -10,9 +10,10 @@
             </button>
         </div>
         <!-- nav -->
-        <nav class="navbar p-3 fixed-top d-none d-lg-block bg-white w-100 border-bottom">
+        <nav class="navbar p-3 fixed-top d-none d-lg-block font-antonio text-uppercase bg-dark text-light w-100">
             <div class="container-fluid">
-                <router-link class="fs-2" to="/">🅼</router-link>
+                <router-link class="text-warning fw-bold ls-base fs-2" to="/">
+                    ROTLD</router-link>
                 <ul class="nav justify-content-end fs-5">
                     <router-link class="nav-link" v-for="(route, index) in router.options.routes" :key="index"
                     :to="route.path">
@@ -23,11 +24,11 @@
             </div>   
         </nav>
 
-        <div class="offcanvas offcanvas-end border-bottom w-100 font-antonio" tabindex="-1" id="offcanvasResponsive" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas offcanvas-end border-bottom w-100 font-antonio bg-dark text-warning" tabindex="-1" id="offcanvasResponsive" aria-labelledby="offcanvasRightLabel">
             <div class="offcanvas-header">
-                <h5 class="offcanvas-title fs-3">🅼</h5>
+                <h5 class="offcanvas-title font-antonio fw-bold ls-base fs-2">ROTLD</h5>
                 <button class="btn pt-0 pe-0" role="button" data-bs-dismiss="offcanvas" aria-label="Close">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="text-warning bi bi-x-lg" viewBox="0 0 16 16">
                         <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
                     </svg>
                 </button>

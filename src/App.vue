@@ -7,7 +7,7 @@ const route = useRoute();
 <template>
   <header>
     <div class="wrapper">
-      <Nav></Nav>
+      <!-- <Nav></Nav> -->
     </div>
   </header>
 
