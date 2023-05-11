@@ -20,11 +20,11 @@ function shorten(text, max) {
   <main>
     <Layout>
       <div class="container-fluid bg-dark" :style="{'background' : 'url('+ getImageUrl('splatter_yellow', 'png') +') center right no-repeat', 'background-size' : 'cover'}">
-        <div class="row min-vh-100 mt-0 mt-lg-5" :style="{'background' : 'url('+ getImageUrl('splatter_yellow', 'png') +') center right no-repeat'}">
-          <div class="col-lg-8 d-flex flex-column my-auto p-5">
-            <h5>A Dad Magazine</h5>
-            <h1 class="text-uppercase" style="filter: drop-shadow(20px 20px 10px goldenrod); line-height: 0.8; letter-spacing: -5px; font-weight: 900; font-size: 26vmin;">Return of the living Dad</h1>
-            <p class="h4 fw-light mt-4">I'm a Dad. Yes, it is like a Zombie movie. <br>These are my stories.</p>
+        <div class="row min-vh-100 mt-3 mt-lg-5" :style="{'background' : 'url('+ getImageUrl('splatter_yellow', 'png') +') center right no-repeat'}">
+          <div class="col-xl-8 col-lg-10 d-flex flex-column my-auto p-5">
+            <h5 class="h4 fw-bold mt-5 mt-lg-0">A Dad Magazine</h5>
+            <h1 class="text-uppercase" style="-webkit-text-stroke: 1px #FFCC00; filter: drop-shadow(15px 15px 5px goldenrod); line-height: 0.8; letter-spacing: -5px; font-weight: 900; font-size: 26vmin;">Return of the living Dad</h1>
+            <p class="h4 fw-bold mt-4 pt-2 ls-base">I'm a Dad. Yes, it is like a Zombie movie. <br>These are my stories.</p>
           </div>
         </div>
 
@@ -70,18 +70,18 @@ function shorten(text, max) {
           <div class="row m-3 mb-0 pb-5">
             <!-- latest -->
             <h2 class="display-2 fw-bold lh-1 ls-1 border-bottom border-dark my-4 p-2 pb-4">Latest</h2>
-            <div class="col-lg-4 p-0" v-for="(post, index) in posts.blog" :key="index">
-              
-              <div class="m-2 bg-warning rounded-3 shadow position-relative" v-if="post.id != 0" >
+            <!-- check if post is published -->
+            <div class="col-lg-4 p-0" v-for="(post, index) in posts.blog" :key="index" :class="post.published != 'true' ? 'd-none' : ''">
+              <div class="m-2 bg-warning rounded-3 shadow position-relative" v-if="post.id != 0">
                 <TransitionGroup name="fade">
-                  <div :key="1" @load="loadImage" v-show="!isLoaded" class="w-100 bg-secondary" style="min-height: 200px"></div>
+                  <div :key="1" @load="loadImage" v-show="!isLoaded" class="w-100 bg-secondary" style="height: 200px"></div>
                   <!-- <img :key="1" @load="loadImage" v-if="!isLoaded" class="fade-in bg-secondary w-100 position-absolute start-0 top-0" src="https://placehold.co/1000x400?text=ROTLD" :alt="post.title"> -->
                   <img :key="2" @load="loadImage" v-show="isLoaded" :src="post.imageUrl" class="fade-in w-100" :alt="post.title" >
                 </TransitionGroup>
                 
                 <div class="p-5" style="min-height: 360px;">
                   <h5>{{ post.date }}</h5>
-                  <h2>{{ post.title }}</h2>
+                  <h2 class="fs-1 ls-base mb-3">{{ post.title }}</h2>
                   <p v-html="shorten(post.body, 175) + '...'"></p>
                   <router-link :to="'/blog/' + post.id">
                     <button class="btn btn-dark px-4">More</button>

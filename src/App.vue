@@ -5,11 +5,7 @@ const route = useRoute();
 </script>
 
 <template>
-  <header>
-    <div class="wrapper">
-      <!-- <Nav></Nav> -->
-    </div>
-  </header>
+  <div class="overflow-hidden">
 
   <router-view v-slot="{ Component }">
     <Transition 
@@ -23,6 +19,7 @@ const route = useRoute();
       <component :is="Component" :key="route.fullPath" />
     </Transition>
   </router-view>
+  </div>
 </template>
 
 <style scoped>

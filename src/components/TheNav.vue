@@ -1,21 +1,21 @@
 <template>
     <div class="w-100">
-        <div class="container-fluid px-0 pt-0 text-secondary w-100 d-lg-none d-flex position-relative z-1">
-            <router-link class="font-antonio fw-bold ls-base p-3 fs-2" to="/">ROTLD</router-link>
+        <nav class="navbar container-fluid p-1 bg-dark w-100 d-lg-none d-flex fixed-top">
+            <router-link class="font-antonio fw-bold ls-base p-3 fs-2" style="color: #FFCC00" to="/">ROTLD</router-link>
             <!-- menu -->
             <button class="btn ms-auto my-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasResponsive" aria-controls="offcanvasResponsive">
-                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-justify-right" viewBox="0 0 16 16">
+                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="#FFCC00" class="bi bi-justify-right" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-4-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
                 </svg>
             </button>
-        </div>
+        </nav>
         <!-- nav -->
         <nav class="navbar p-3 fixed-top d-none d-lg-block font-antonio text-uppercase bg-dark text-light w-100">
             <div class="container-fluid">
-                <router-link class="text-warning fw-bold ls-base fs-2" to="/">
+                <router-link class="fw-bold ls-base fs-2" style="color: #FFCC00" to="/">
                     ROTLD</router-link>
                 <ul class="nav justify-content-end fs-5">
-                    <router-link class="nav-link" v-for="(route, index) in router.options.routes" :key="index"
+                    <router-link class="nav-link" v-for="(route, index) in router.options.routes.slice(0,2)" :key="index"
                     :to="route.path">
                         {{ route.name }}
                     </router-link>
@@ -37,11 +37,11 @@
                 <ul class="nav">
                     <li class="lh-1 ls-1 fw-900"
                     data-bs-dismiss="offcanvas">
-                        <router-link class="nav-link pb-1" v-for="(route, index) in router.options.routes.slice(0,5)" :key="index"
+                        <router-link class="nav-link text-uppercase pb-1" v-for="(route, index) in router.options.routes.slice(0,2)" :key="index"
                         :to="route.path">
                             {{ route.name }}
                         </router-link>
-                        <a class="nav-link" href="mailto:bassfx@duck.com">Contact</a>
+                        <a class="nav-link text-uppercase" href="mailto:bassfx@duck.com">Contact</a>
                     </li>
                 </ul>
             </div>
@@ -77,7 +77,7 @@ a:hover {
 }
 
 .offcanvas-body .nav-link {
-    font-size: 8vmin;
+    font-size: 10vmin;
     font-weight: 900;
     /* line-height: 8vmin; */
 }
