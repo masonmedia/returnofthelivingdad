@@ -5,11 +5,14 @@ const route = useRoute();
 </script>
 
 <template>
-  <div class="overflow-hidden">
+  <div class="fade-in">
+    <header>
+      <Nav></Nav>
+    </header>
 
   <router-view v-slot="{ Component }">
     <Transition 
-    name="fade"
+    name="slide-fade"
     mode="out-in">
     <!-- <transition 
     mode="out-in"

@@ -12,7 +12,7 @@ function getImageUrl(name, ext) {
 
 <template>
     <div class="container-fluid p-0 border-top border-warning">
-        <div class="row bg-dark text-warning p-4">
+        <div class="row text-warning p-4">
             <div class="col-lg-3 col-md-6 p-4">
                 <img :src="getImageUrl('splatter_yellow','png')" class="w-25" alt="">
                 <h1 class="display-3 fw-bold text-uppercase lh-1 ls-base">Return of the Living Dad</h1>

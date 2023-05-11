@@ -19,7 +19,7 @@ function shorten(text, max) {
 <template>
   <main>
     <Layout>
-      <div class="container-fluid bg-dark" :style="{'background' : 'url('+ getImageUrl('splatter_yellow', 'png') +') center center no-repeat', 'background-size' : 'cover'}">
+      <div class="container-fluid" :style="{'background' : 'url('+ getImageUrl('splatter_yellow', 'png') +') center center no-repeat', 'background-size' : 'cover'}">
         <div class="row min-vh-100 mt-3 mt-lg-5" :style="{'background' : 'url('+ getImageUrl('splatter_yellow', 'png') +') center left no-repeat'}">
           <div class="col-xl-8 col-lg-10 d-flex flex-column my-auto p-5">
             <!-- <h5 class="h4 fw-bold mt-5 mt-lg-0">ROTLD</h5> -->
@@ -62,27 +62,16 @@ function shorten(text, max) {
 
             </div>
             <div class="col-lg-8 d-flex flex-column my-auto p-5">
-              <!-- <h5>I'm a Dad. Yes, it's like a zombie movie.</h5> -->
               <h1 class="display-2 fw-bold lh-1 ls-1 my-3">I have two beautiful, unique, creative, amazing, difficult, defiant, persistent, determined, and funny boys.</h1>
               <p class="h4 py-3">I am thankful for them every day. I am also destroyed by them evey day. And it is this destruction that fuels my writing. This blog is an outlet to rant about my life and experience as a Dad. But it's also, I hope, something that might give other parents like me out there a bit of ease, a bit of support, knowing that the reality belies the internet. Raising kids is brutal. It's f*#$ed.</p>
             </div>
           </div>
         </section>
-        
-        <!-- <section>
-          <div class="row min-vh-100 bg-dark text-light">
-            <div class="col-lg-8 d-flex flex-column my-auto p-5">
-              <h5>I'm a Dad. Yes, it's like a zombie movie.</h5>
-              <h1 class="display-1 fw-bold lh-1 ls-1 my-3">A parent mag for people who spend 60% of their time sick, 20% handling tantrums, 10% buying groceries, 9% cleaning the house, and 1% sleeping.</h1>
-              <p class="h4 py-3">Conversations on parenting, insights into challenging behaviour, raw exposees on the realities of utter fatigue and relentless tantrums, and stories that (try to) help you understand the big strange world we live in.</p>
-            </div>
-          </div>
-        </section> -->
 
         <section>
           <div class="row m-3 mb-0 pb-5">
             <!-- latest -->
-            <h2 class="display-2 fw-bold lh-1 ls-1 border-bottom border-warning my-4 p-2 pb-4" style="color: #FFCC00">Latest posts</h2>
+            <h2 class="display-2 fw-bold lh-1 ls-1 border-bottom border-warning my-4 p-2 pb-4" style="color: #FFCC00; -webkit-text-stroke: 1px #000; filter: drop-shadow(5px 5px 1px #000);">Latest posts</h2>
             <!-- check if post is published -->
             <div class="col-lg-4 p-0" v-for="(post, index) in posts.blog.slice(0,4)" :key="index" :class="post.published != 'true' ? 'd-none' : ''">
               <div class="m-2 bg-warning rounded-3 shadow position-relative" v-if="post.id != 0">

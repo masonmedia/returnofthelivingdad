@@ -76,15 +76,15 @@ function copyToClipboard() {
 
 <template>
   <Layout>
-    <div class="container-fluid">
-      <div class="row min-vh-100 text-secondary">
+    <div class="container-fluid text-light">
+      <div class="row min-vh-100">
         <div class="col-lg-6 d-flex flex-column justify-content-center align-items-center text-center p-5">
           <h5 class="fs-5 lh-1 mb-0">Return of the Living Dad</h5>
-          <h1 class="display-3 fw-900 lh-1 ls-1 my-3 text-dark">{{ post.title }}</h1>
+          <h1 class="display-2 fw-900 lh-1 ls-1 mt-3 mb-4 text-yellow">{{ post.title }}</h1>
           <p class="lh-1 mb-1">Written by <span class="fw-bold">Andrew Mason</span></p>
           <p v-if="post.date" class="lh-1">On <span class="fw-bold">{{ post.date }}</span></p>
           <div class="d-flex">
-            <span class="badge text-bg-secondary me-1" v-for="(tag, index) in post.tags" :key="index">{{ tag.category }}</span>
+            <span class="badge text-bg-light me-1" v-for="(tag, index) in post.tags" :key="index">{{ tag.category }}</span>
           </div>
         </div>
         
@@ -111,10 +111,10 @@ function copyToClipboard() {
                 <div class="col-sm-12 p-3 border-bottom" v-for="(item, index) in posts.blog.slice(1,4)" :key="index">
                   <div class="pb-3">
                     <h3 class="fw-bold m-0" style="letter-spacing: -1px;">{{ item.title }}</h3>
-                    <p class="mb-3 text-secondary">{{ item.date }}</p>
+                    <p class="mb-3 text-grey">{{ item.date }}</p>
                     <p class="mb-0" v-html="item.body.slice(0,100) + '...'"></p>
                     <router-link :to="'/blog/' + item.id">
-                      <button class="btn btn-sm btn-outline-dark">More</button>
+                      <button class="btn btn-sm btn-outline-light">More</button>
                     </router-link>
                   </div>
                 </div>
@@ -126,11 +126,11 @@ function copyToClipboard() {
               <h1 class="display-4 fw-900 lh-1 ls-1 mb-3">{{ post.title }}</h1>
               <!-- <h5 class="h6 fw-bold text-secondary border-bottom pb-4 mb-4">{{ 'Estimated read time ' + readingTime(post.body + post.title) + ' mins' }}</h5> -->
               <h5 v-if="wordCount(post.body) <= 1" class="h6 fw-bold text-secondary border-bottom pb-4 mb-4">{{ 'Estimated read time ' + wordCount(post.body) + ' min' }}</h5>
-              <h5 v-else class="h6 fw-bold text-secondary border-bottom pb-4 mb-4">{{ 'Estimated read time ' + wordCount(post.body) + ' mins' }}</h5>
+              <h5 v-else class="h6 fw-bold text-grey border-bottom pb-4 mb-4">{{ 'Estimated read time ' + wordCount(post.body) + ' mins' }}</h5>
               <p class="fs-5" v-html="post.body"></p>
               <!-- prev/next -->
               <div class="d-flex my-4">
-                <button v-if="post.id" @click="router.push('/blog/' + --route.params.id)" :class="post.id == 0 ? 'd-none' : ''" class="btn btn-outline-dark me-2">Prev</button>
+                <button v-if="post.id" @click="router.push('/blog/' + --route.params.id)" :class="post.id == 0 ? 'd-none' : ''" class="btn btn-outline-light me-2">Prev</button>
 
                 <button v-if="post.id" :class="post.id == posts.blog[0].id ? 'd-none' : ''" @click="router.push('/blog/' + ++route.params.id)" class="btn btn-outline-dark me-2">Next</button>
               </div>
@@ -138,17 +138,17 @@ function copyToClipboard() {
               <!-- share -->
               <div class=" d-flex py-4 mt-4 border-top">
                 <a :href="shareButton" target="_blank">
-                  <button class="btn btn-outline-dark p-2 fw-900 fs-5 me-2" style="width: 50px; height: 50px; border-radius: 50%">
+                  <button class="btn btn-outline-light p-2 fw-900 fs-5 me-2" style="width: 50px; height: 50px; border-radius: 50%">
                     f
                   </button>
                 </a>
                 <a :href="tweetCurrentPage(post.title)" target="_blank" alt="Tweet this page">
-                  <button class="btn btn-outline-dark p-2 fw-900 fs-5 me-2" style="width: 50px; height: 50px; border-radius: 50%">
+                  <button class="btn btn-outline-light p-2 fw-900 fs-5 me-2" style="width: 50px; height: 50px; border-radius: 50%">
                     t
                   </button>
                 </a>
                   <button @click="copyToClipboard" 
-                  class="btn btn-outline-dark p-2 fw-900 fs-5" style="width: 50px; height: 50px; border-radius: 50%">
+                  class="btn btn-outline-light p-2 fw-900 fs-5" style="width: 50px; height: 50px; border-radius: 50%">
                     <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-link-45deg" viewBox="0 0 16 16">
                       <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
                       <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>

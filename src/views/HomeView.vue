@@ -19,7 +19,7 @@ function shorten(text, max) {
 <template>
   <main>
     <Layout>
-      <div class="container-fluid bg-dark" :style="{'background' : 'url('+ getImageUrl('splatter_yellow', 'png') +') center right no-repeat', 'background-size' : 'cover'}">
+      <div class="container-fluid" :style="{'background' : 'url('+ getImageUrl('splatter_yellow', 'png') +') center right no-repeat', 'background-size' : 'cover'}">
         <div class="row min-vh-100 mt-3 mt-lg-5" :style="{'background' : 'url('+ getImageUrl('splatter_yellow', 'png') +') center right no-repeat'}">
           <div class="col-xl-8 col-lg-10 d-flex flex-column my-auto p-5">
             <h5 class="h4 fw-bold mt-5 mt-lg-0">A Dad Magazine</h5>
