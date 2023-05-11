@@ -15,6 +15,7 @@
         "id": {":type": "line"},
         "date": {":type": "line"},
         "slug": {":type": "line"},
+        "published": {":type": "line"},
         "imageUrl": {
             ":type": "line"
           },
