@@ -14,10 +14,11 @@ function getImageUrl(name, ext) {
     <div class="container-fluid p-0 border-top border-warning">
         <div class="row bg-dark text-warning p-4">
             <div class="col-lg-3 col-md-6 p-4">
-                <h1 class="display-2 fw-bold text-uppercase lh-1 ls-base">Return of the Living Dad</h1>
+                <img :src="getImageUrl('splatter_yellow','png')" class="w-25" alt="">
+                <h1 class="display-3 fw-bold text-uppercase lh-1 ls-base">Return of the Living Dad</h1>
             </div>
             <div class="col-lg-3 col-md-6 p-4">
-                <p><span class="fw-bold">Return of the Living Dad</span> is a parenting blog by Designer, Frontend Developer, Musician, and Dad, <a class="fw-bold" href="https://andrewmasonmedia.com" target="_blank">Andrew Mason</a>. It began out of a need to communicate the pure, destruction waged on the core of my humanity from two small, difficult humans. It grew to be a format for me to offer genuine, comedic perspective on parenting when it isn't glossy, isn't glamorous, and isn't at all what the internet says it should be.</p>
+                <p><span class="fw-bold">Return of the Living Dad</span> is a parenting blog by Designer, Frontend Developer, Musician, and Dad, <a class="fw-bold" href="https://andrewmasonmedia.com" target="_blank">Andrew Mason</a>. It began from a need to record and communicate the pure, destruction waged on the core of my humanity from two small, difficult humans. It grew to be a format for me to offer genuine, comedic perspective on parenting when it isn't glossy, isn't glamorous, and isn't at all what the internet says it should be.</p>
             </div>
             <div class="col-lg-3 col-md-6 d-flex flex-column align-items-start justify-content-start p-4">
                 <h3 class="ls-base fw-900 text-uppercase mt-0">{{ posts.blog.slice(-1)[0].title }}</h3>

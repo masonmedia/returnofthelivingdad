@@ -89,13 +89,13 @@ function copyToClipboard() {
         </div>
         
         <div class="col-lg-6 p-0" style="min-height: 50vh;">
-          <!-- <TransitionGroup name="fade">
+          <TransitionGroup name="fade">
               <img :key="1" @load="loadImage" v-show="!isLoaded" class="fade-in bg-secondary w-100 h-100 object-fit" src="https://placehold.co/600x400?text=ROTLD" :alt="post.title">
               <img :key="2" @load="loadImage" v-show="isLoaded" class="fade-in w-100 h-100 object-fit" :src="post.imageUrl" :alt="post.title">
-          </TransitionGroup> -->
-          <Transition name="fade" mode="out-in">
+          </TransitionGroup>
+          <!-- <Transition name="fade" mode="out-in">
             <img @load="loadImage" v-show="isLoaded" background="lightgrey" width="100%" height="400px" class="fade-in w-100 h-100 object-fit" :src="post.imageUrl" :alt="post.title">
-          </Transition>
+          </Transition> -->
           </div>
         </div>
 
@@ -105,10 +105,10 @@ function copyToClipboard() {
             <div class="col-lg-3 text-end px-4 pb-3 mb-4 order-2 order-lg-1">
               <div class="row sidebar">
                 <div class="col-sm-12">
-                  <p><span class="fw-bold">Return of the Living Dad</span> is a parenting blog by Designer, Frontend Developer, Musician, and Dad, Andrew Mason. It began out of a need to communicate the pure, destruction waged on the core of my being from two small, difficult humans. It grew to be a format for me to offer real, genuine perspective on parenting when it isn't glossy, isn't glamorous, and isn't at all what the internet says it should be.</p>
+                  <p><span class="fw-bold">Return of the Living Dad</span> is a parenting blog by Designer, Frontend Developer, Musician, and Dad, Andrew Mason. It began from a need to record and communicate the pure, destruction waged on the core of my being from two small, difficult humans. It grew to be a format for me to offer real, genuine perspective on parenting when it isn't glossy, isn't glamorous, and isn't at all what the internet says it should be.</p>
                 </div>
                 <hr class="my-3">
-                <div class="col-sm-12 p-3 border-bottom" v-for="(item, index) in posts.blog.slice(0,3)" :key="index">
+                <div class="col-sm-12 p-3 border-bottom" v-for="(item, index) in posts.blog.slice(1,4)" :key="index">
                   <div class="pb-3">
                     <h3 class="fw-bold m-0" style="letter-spacing: -1px;">{{ item.title }}</h3>
                     <p class="mb-3 text-secondary">{{ item.date }}</p>
