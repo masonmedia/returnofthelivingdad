@@ -75,6 +75,12 @@ function copyToClipboard() {
 </script>
 
 <template>
+  <!-- <meta property="og:url"                content="http://www.nytimes.com/2015/02/19/arts/international/when-great-minds-dont-think-alike.html" />
+<meta property="og:type"               content="article" />
+<meta property="og:title"              content="When Great Minds Don’t Think Alike" />
+<meta property="og:description"        content="How much does culture influence creative thinking?" />
+<meta property="og:image"              content="http://static01.nyt.com/images/2015/02/19/arts/international/19iht-btnumbers19A/19iht-btnumbers19A-facebookJumbo-v2.jpg" /> -->
+
   <Layout>
     <div class="container-fluid text-light">
       <div class="row min-vh-100">
@@ -132,7 +138,7 @@ function copyToClipboard() {
               <div class="d-flex my-4">
                 <button v-if="post.id" @click="router.push('/blog/' + --route.params.id)" :class="post.id == 0 ? 'd-none' : ''" class="btn btn-outline-light me-2">Prev</button>
 
-                <button v-if="post.id" :class="post.id == posts.blog[0].id ? 'd-none' : ''" @click="router.push('/blog/' + ++route.params.id)" class="btn btn-outline-dark me-2">Next</button>
+                <button v-if="post.id" :class="post.id == posts.blog[0].id ? 'd-none' : ''" @click="router.push('/blog/' + ++route.params.id)" class="btn btn-outline-light me-2">Next</button>
               </div>
               <!-- <p>{{ nextItem.title }}</p> -->
               <!-- share -->
