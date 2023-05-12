@@ -3,7 +3,7 @@
 import posts from '../content/frontaid.content.json';
 import Layout from '../components/TheLayout.vue';
 import useImageLoader from '../stores/useImageLoader';
-const { isLoaded, loadImage } = useImageLoader();
+const { isLoaded } = useImageLoader();
 
 // image paths
 function getImageUrl(name, ext) {
@@ -21,7 +21,7 @@ function shorten(text, max) {
 <template>
   <main>
     <Layout>
-      <div class="container-fluid" :style="{'background' : 'url('+ getImageUrl('splatter_yellow', 'png') +') center right no-repeat', 'background-size' : 'cover'}">
+      <div class="container-fluid" :style="{'background' : 'url('+ getImageUrl('splatter_yellow', 'png') +') center right no-repeat', 'background-size' : 'cover'}">        
         <div class="row min-vh-100 mt-3 mt-lg-5" :style="{'background' : 'url('+ getImageUrl('splatter_yellow', 'png') +') center right no-repeat'}">
           <div class="col-xl-8 col-lg-10 d-flex flex-column my-auto p-5">
             <h5 class="h4 fw-bold mt-5 mt-lg-0">A Dad Magazine</h5>
@@ -51,8 +51,12 @@ function shorten(text, max) {
           </div>
 
           <div class="row min-vh-100 bg-dark text-warning rounded-3 rounded-start-0 shadow m-3">
-            <div class="col-lg-6 p-0">
-              <img :src="posts.blog.slice(-1)[0].imageUrl" class="w-100 h-100 object-fit" alt="">
+            <div class="col-lg-6 p-0 position-relative">
+              <TransitionGroup name="fade">
+                  <!-- <img :key="1" @load="loadImage" v-show="!isLoaded" :src="getImageUrl('splatter_yellow', 'png')" alt="" class="fade-in w-100 h-100 object-fit bg-dark" style="min-height: 500px"> -->
+                  <div :key="1" @load="loadImage" v-show="!isLoaded" class="page-fade w-100 h-100 object-fit bg-secondary" style="min-height: 500px"></div>
+                  <img :key="2" @load="loadImage" v-show="isLoaded" :src="posts.blog.slice(-1)[0].imageUrl" class="page-fade w-100 h-100 object-fit" style="min-height: 250px" :alt="posts.blog.slice(-1)[0].title" >
+                </TransitionGroup>
             </div>
             <div class="col-lg-6 d-flex my-auto">
                 <div class="p-5" style="min-height: 300px;">
@@ -69,19 +73,17 @@ function shorten(text, max) {
         </section>
 
         <section>
-          <div class="row m-3 mb-0 pb-5">
+          <div class="row m-3 mb-0 pb-5 position-relative">
             <!-- latest -->
             <h2 class="display-2 fw-bold lh-1 ls-1 border-bottom border-dark my-4 p-2 pb-4">Latest</h2>
             <!-- check if post is published -->
             <div class="col-lg-4 p-0" v-for="(post, index) in posts.blog" :key="index" :class="post.published != 'true' ? 'd-none' : ''">
-              <div class="m-2 bg-warning rounded-3 shadow position-relative" v-if="post.id != 0">
+              <div class="m-2 bg-dark rounded-3 shadow position-relative" v-if="post.id != 0">
                 <TransitionGroup name="fade">
-                  <div :key="1" @load="loadImage" v-show="!isLoaded" class="w-100 bg-secondary" style="height: 200px"></div>
-                  <!-- <img :key="1" @load="loadImage" v-if="!isLoaded" class="fade-in bg-secondary w-100 position-absolute start-0 top-0" src="https://placehold.co/1000x400?text=ROTLD" :alt="post.title"> -->
-                  <img :key="2" @load="loadImage" v-show="isLoaded" :src="post.imageUrl" class="fade-in w-100" :alt="post.title" >
+                  <div :key="1" @load="loadImage" v-show="!isLoaded" class="fade-in w-100 bg-secondary" style="min-height: 250px"></div>
+                  <img :key="2" @load="loadImage" v-show="isLoaded" :src="post.imageUrl" class="page-fade w-100 h-100 object-fit" style="min-height: 250px" :alt="post.title" >
                 </TransitionGroup>
-                
-                <div class="p-5" style="min-height: 360px;">
+                <div class="p-5 bg-warning rounded-bottom" style="min-height: 360px;">
                   <h5>{{ post.date }}</h5>
                   <h2 class="fs-1 ls-base mb-3">{{ post.title }}</h2>
                   <p v-html="shorten(post.body, 175) + '...'"></p>

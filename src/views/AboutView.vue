@@ -3,7 +3,7 @@
 import posts from '../content/frontaid.content.json';
 import Layout from '../components/TheLayout.vue';
 import useImageLoader from '../stores/useImageLoader';
-const { isLoaded, loadImage } = useImageLoader();
+const { isLoaded } = useImageLoader();
 
 // image paths
 function getImageUrl(name, ext) {
@@ -14,6 +14,7 @@ function getImageUrl(name, ext) {
 function shorten(text, max) {
   return text && text.length > max ? text.slice(0, max).split(' ').slice(0, -1).join(' ') : text
 }
+
 </script>
 
 <template>
@@ -38,7 +39,7 @@ function shorten(text, max) {
                   <img style="width: 150px;" :src="getImageUrl('splatter_yellow', 'png')" alt="">
                   <h5>About me</h5>
                   <h2 class="display-2 ls-1 fw-900 text-uppercase">Dad, zombie, and a couple other things.</h2>
-                  <p class="h4 fw-bold my-4">I'm Andrew. In addition to being a musician, frontend developer, designer, and writer, I'm a Dad. It's the single greatest challenge I've undertaken as a human.</p>
+                  <p class="h4 fw-bold my-4">I'm Andrew. I'm a musician, frontend developer, designer, and writer, I'm also a Dad. It's the single greatest challenge I've undertaken as a human.</p>
                   <p class="h5">People don't say this enough. Or they don't say it this way. I mean there's a lot of the usual social media style "Parenting is my greatest achievement" bullshit but it's usually embroidered on a throw pillow in a filtered photo of smiles by the seaside with cucumber water and a yoga mat. The challenge I'm talking about is a grimy, crushing world of constant sickness, noise, and fatigue. There's no polish. There's no seaside. There's no cucumber water. There's the tap, screaming, and toys everywhere.</p>
                 </div>
             </div>

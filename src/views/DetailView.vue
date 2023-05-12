@@ -2,26 +2,21 @@
 
 import { ref, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import posts from '../content/frontaid.content.json'
 import Layout from '../components/TheLayout.vue';
 import useImageLoader from '../stores/useImageLoader'
 // check image loaded
-const { isLoaded, loadImage } = useImageLoader();
-
-import posts from '../content/frontaid.content.json'
+const { isLoaded } = useImageLoader();
 
 const route = useRoute();
 const router = useRouter();
 
 // const postId = parseInt(route.params.id)
 
+// let isPublished = posts.blog.every(obj => obj.published === 'true');
+
 const post = computed(() => {
   return posts.blog.find(post => post.id === route.params.id)
-})
-
-const currentItemIndex = ref(0);
-
-const nextItem = computed(() => {
-  return posts.blog[currentItemIndex.value + 1]
 })
 
 // const post = ref({});
@@ -72,15 +67,26 @@ function copyToClipboard() {
   navigator.clipboard.writeText(window.location.href);
 }
 
+// email page
+
+function emailPage(title) {
+  const href = "mailto:?";
+  const url = encodeURIComponent(window.location.href.slice(7));
+  const emailShare = href + 'subject=' +  title + '&body=' + 'Check out this great article I found from returnofthelivingdad.com: ' + url;
+  return emailShare;
+}
+
+// check published
+
+
+function checkPublished(myArray) {
+  // const myArray = [{one: true}, {one: true}, {one: true}];
+  const isPublished = myArray.every(obj => obj.published === 'true');
+  return isPublished; // true
+}
 </script>
 
 <template>
-  <!-- <meta property="og:url"                content="http://www.nytimes.com/2015/02/19/arts/international/when-great-minds-dont-think-alike.html" />
-<meta property="og:type"               content="article" />
-<meta property="og:title"              content="When Great Minds Don’t Think Alike" />
-<meta property="og:description"        content="How much does culture influence creative thinking?" />
-<meta property="og:image"              content="http://static01.nyt.com/images/2015/02/19/arts/international/19iht-btnumbers19A/19iht-btnumbers19A-facebookJumbo-v2.jpg" /> -->
-
   <Layout>
     <div class="container-fluid text-light">
       <div class="row min-vh-100">
@@ -94,14 +100,11 @@ function copyToClipboard() {
           </div>
         </div>
         
-        <div class="col-lg-6 p-0" style="min-height: 50vh;">
+        <div class="col-lg-6 p-0 position-relative" style="min-height: 50vh;">
           <TransitionGroup name="fade">
-              <img :key="1" @load="loadImage" v-show="!isLoaded" class="fade-in bg-secondary w-100 h-100 object-fit" src="https://placehold.co/600x400?text=ROTLD" :alt="post.title">
-              <img :key="2" @load="loadImage" v-show="isLoaded" class="fade-in w-100 h-100 object-fit" :src="post.imageUrl" :alt="post.title">
+            <div :key="1" @load="loadImage" v-show="!isLoaded" class="page-fade w-100 h-100 object-fit bg-secondary" style="min-height: 500px"></div>
+            <img :key="2" @load="loadImage" v-show="isLoaded" :src="post.imageUrl" class="page-fade w-100 h-100 object-fit" :alt="post.title" >
           </TransitionGroup>
-          <!-- <Transition name="fade" mode="out-in">
-            <img @load="loadImage" v-show="isLoaded" background="lightgrey" width="100%" height="400px" class="fade-in w-100 h-100 object-fit" :src="post.imageUrl" :alt="post.title">
-          </Transition> -->
           </div>
         </div>
 
@@ -114,7 +117,7 @@ function copyToClipboard() {
                   <p><span class="fw-bold">Return of the Living Dad</span> is a parenting blog by Designer, Frontend Developer, Musician, and Dad, Andrew Mason. It began from a need to record and communicate the pure, destruction waged on the core of my being from two small, difficult humans. It grew to be a format for me to offer real, genuine perspective on parenting when it isn't glossy, isn't glamorous, and isn't at all what the internet says it should be.</p>
                 </div>
                 <hr class="my-3">
-                <div class="col-sm-12 p-3 border-bottom" v-for="(item, index) in posts.blog.slice(1,4)" :key="index">
+                <div class="col-sm-12 p-3 border-bottom" v-for="(item, index) in posts.blog.slice(1,5)" :key="index" :class="item.id === post.id ? 'd-none' : ''">
                   <div class="pb-3">
                     <h3 class="fw-bold m-0" style="letter-spacing: -1px;">{{ item.title }}</h3>
                     <p class="mb-3 text-grey">{{ item.date }}</p>
@@ -140,7 +143,7 @@ function copyToClipboard() {
 
                 <button v-if="post.id" :class="post.id == posts.blog[0].id ? 'd-none' : ''" @click="router.push('/blog/' + ++route.params.id)" class="btn btn-outline-light me-2">Next</button>
               </div>
-              <!-- <p>{{ nextItem.title }}</p> -->
+             
               <!-- share -->
               <div class=" d-flex py-4 mt-4 border-top">
                 <a :href="shareButton" target="_blank">
@@ -150,9 +153,19 @@ function copyToClipboard() {
                 </a>
                 <a :href="tweetCurrentPage(post.title)" target="_blank" alt="Tweet this page">
                   <button class="btn btn-outline-light p-2 fw-900 fs-5 me-2" style="width: 50px; height: 50px; border-radius: 50%">
-                    t
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-twitter" viewBox="0 0 16 16">
+                      <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
+                    </svg>
                   </button>
                 </a>
+                <a :href="emailPage(post.title)">
+                  <button class="btn btn-outline-light p-2 fw-900 fs-5 me-2" style="width: 50px; height: 50px; border-radius: 50%">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+                      <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
+                  </svg>
+                  </button>
+                </a>
+
                   <button @click="copyToClipboard" 
                   class="btn btn-outline-light p-2 fw-900 fs-5" style="width: 50px; height: 50px; border-radius: 50%">
                     <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-link-45deg" viewBox="0 0 16 16">

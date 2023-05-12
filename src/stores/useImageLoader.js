@@ -2,13 +2,12 @@
 import { ref } from "vue";
 
 export default function () {
-  const isLoaded = ref(false);
-  function loadImage() {
-    isLoaded.value = true
-    console.log('image loaded = ' + isLoaded.value)
-}
+  let isLoaded = ref(false);
+  setTimeout( function loadImage() {
+      isLoaded.value = true
+  }, 1000)
   return {
-    isLoaded,
-    loadImage
+    isLoaded
+    // loadImage
   }
 }
