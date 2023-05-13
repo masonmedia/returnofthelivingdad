@@ -5,7 +5,7 @@ const route = useRoute();
 </script>
 
 <template>
-  <div class="fade-in">
+  <div class="page-fade">
     <header>
       <Nav></Nav>
     </header>

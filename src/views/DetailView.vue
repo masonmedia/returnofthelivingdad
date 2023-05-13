@@ -15,8 +15,28 @@ const router = useRouter();
 
 // let isPublished = posts.blog.every(obj => obj.published === 'true');
 
+// original id as string 
+// const post = computed(() => {
+//   return posts.blog.find(post => post.id === route.params.id)
+// })
+
+// add dynamic id to each post => needed to use parseInt as the new id additions were integers not strings as original
 const post = computed(() => {
-  return posts.blog.find(post => post.id === route.params.id)
+  let arr = posts.blog;
+  for (var i = 0; i < arr.length; i++) {
+    arr[i].id = i + 1;
+  }
+  const idInteger = parseInt(route.params.id)
+  return arr.find(post => post.id === idInteger)
+})
+
+const postWithId = computed(() => {
+  // var arr = [{name: "John"}, {name: "Jane"}];
+  let arr = posts.blog;
+  for (var i = 0; i < arr.length; i++) {
+    arr[i].id = i + 1;
+  }
+  return arr;
 })
 
 // const post = ref({});
@@ -79,11 +99,20 @@ function emailPage(title) {
 // check published
 
 
-function checkPublished(myArray) {
-  // const myArray = [{one: true}, {one: true}, {one: true}];
-  const isPublished = myArray.every(obj => obj.published === 'true');
-  return isPublished; // true
-}
+// function checkPublished() {
+//   const myArray = [{one: true}, {one: true}, {one: true}];
+//   const isPublished = myArray.every(obj => obj.published === 'true');
+//   return isPublished; 
+
+//   var lang = [ {name : "JavaScript"}, {name : "Java"}];
+// var hasJava = e => e.name === "Java";
+// var hasPython = e => e.name === "Python";
+// lang.findIndex(hasJava); // 1
+// lang.findIndex(hasPython); // -1
+// var isPublished = posts.blog.findIndex(e => e.published === 'true')
+// console.log(isPublished)
+// }
+
 </script>
 
 <template>
@@ -103,7 +132,7 @@ function checkPublished(myArray) {
         <div class="col-lg-6 p-0 position-relative" style="min-height: 50vh;">
           <TransitionGroup name="fade">
             <div :key="1" @load="loadImage" v-show="!isLoaded" class="page-fade w-100 h-100 object-fit bg-secondary" style="min-height: 500px"></div>
-            <img :key="2" @load="loadImage" v-show="isLoaded" :src="post.imageUrl" class="page-fade w-100 h-100 object-fit" :alt="post.title" >
+            <img :key="2" @load="loadImage" v-show="isLoaded" :src="post.imageUrl" class="fade-in w-100 h-100 object-fit" :alt="post.title">
           </TransitionGroup>
           </div>
         </div>
@@ -117,7 +146,7 @@ function checkPublished(myArray) {
                   <p><span class="fw-bold">Return of the Living Dad</span> is a parenting blog by Designer, Frontend Developer, Musician, and Dad, Andrew Mason. It began from a need to record and communicate the pure, destruction waged on the core of my being from two small, difficult humans. It grew to be a format for me to offer real, genuine perspective on parenting when it isn't glossy, isn't glamorous, and isn't at all what the internet says it should be.</p>
                 </div>
                 <hr class="my-3">
-                <div class="col-sm-12 p-3 border-bottom" v-for="(item, index) in posts.blog.slice(1,5)" :key="index" :class="item.id === post.id ? 'd-none' : ''">
+                <div class="col-sm-12 p-3 border-bottom" v-for="(item, index) in postWithId.slice(1, 4)" :key="index" :class="item.id === post.id ? 'd-none' : ''">
                   <div class="pb-3">
                     <h3 class="fw-bold m-0" style="letter-spacing: -1px;">{{ item.title }}</h3>
                     <p class="mb-3 text-grey">{{ item.date }}</p>
@@ -141,7 +170,7 @@ function checkPublished(myArray) {
               <div class="d-flex my-4">
                 <button v-if="post.id" @click="router.push('/blog/' + --route.params.id)" :class="post.id == 0 ? 'd-none' : ''" class="btn btn-outline-light me-2">Prev</button>
 
-                <button v-if="post.id" :class="post.id == posts.blog[0].id ? 'd-none' : ''" @click="router.push('/blog/' + ++route.params.id)" class="btn btn-outline-light me-2">Next</button>
+                <button v-if="post.id" :class="post.id == posts.blog.slice(-1)[0].id ? 'd-none' : ''" @click="router.push('/blog/' + ++route.params.id)" class="btn btn-outline-light me-2">Next</button>
               </div>
              
               <!-- share -->
