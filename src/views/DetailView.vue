@@ -4,6 +4,7 @@ import { ref, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import posts from '../content/frontaid.content.json'
 import Layout from '../components/TheLayout.vue';
+import PostFooter from '../components/ThePostFooter.vue';
 import useImageLoader from '../stores/useImageLoader'
 // check image loaded
 const { isLoaded } = useImageLoader();
@@ -20,7 +21,7 @@ const router = useRouter();
 //   return posts.blog.find(post => post.id === route.params.id)
 // })
 
-// add dynamic id to each post => needed to use parseInt as the new id additions were integers not strings as original
+// add dynamic id to each post for navigation => to remove need for manual field in JSON => needed to use parseInt as the new id additions were integers not strings as original
 const post = computed(() => {
   let arr = posts.blog;
   for (var i = 0; i < arr.length; i++) {
@@ -30,6 +31,7 @@ const post = computed(() => {
   return arr.find(post => post.id === idInteger)
 })
 
+// add dynamic id to posts for display
 const postWithId = computed(() => {
   // var arr = [{name: "John"}, {name: "Jane"}];
   let arr = posts.blog;
@@ -60,14 +62,12 @@ function wordCount(str) {
 }
 
 // AI code
-function readingTime(str) {
-  const wpm = 250;
-  const words = str.trim().split(/\s+/).length;
-  const time = Math.ceil(words / wpm);
-  return time;
-}
-
-// prev/next
+// function readingTime(str) {
+//   const wpm = 250;
+//   const words = str.trim().split(/\s+/).length;
+//   const time = Math.ceil(words / wpm);
+//   return time;
+// }
 
 // fb share btn
 const fbShare = "https://www.facebook.com/sharer/sharer.php?u=";
@@ -96,30 +96,35 @@ function emailPage(title) {
   return emailShare;
 }
 
-// check published
+// const shuffle = computed(() => {
+//   let array = posts.blog;
+//   for (let i = array.length - 1; i > 0; i--) {
+//     const j = Math.floor(Math.random() * (i + 1));
+//     [array[i], array[j]] = [array[j], array[i]];
+//   }
+//   return array;
+// })
 
+function shuffle(array) {
+  let currentIndex = array.length,  randomIndex;
+  while (currentIndex != 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]
+    ];
+  }
+  return array;
+}
 
-// function checkPublished() {
-//   const myArray = [{one: true}, {one: true}, {one: true}];
-//   const isPublished = myArray.every(obj => obj.published === 'true');
-//   return isPublished; 
-
-//   var lang = [ {name : "JavaScript"}, {name : "Java"}];
-// var hasJava = e => e.name === "Java";
-// var hasPython = e => e.name === "Python";
-// lang.findIndex(hasJava); // 1
-// lang.findIndex(hasPython); // -1
-// var isPublished = posts.blog.findIndex(e => e.published === 'true')
-// console.log(isPublished)
-// }
 
 </script>
 
 <template>
   <Layout>
     <div class="container-fluid text-light">
-      <div class="row min-vh-100">
-        <div class="col-lg-6 d-flex flex-column justify-content-center align-items-center text-center p-5">
+      <div class="row min-vh-100 mt-5 mt-lg-0">
+        <div class="col-lg-6 d-flex flex-column justify-content-center align-items-center min-vh-50 text-center p-5">
           <h5 class="fs-5 lh-1 mb-0">Return of the Living Dad</h5>
           <h1 class="display-2 fw-900 lh-1 ls-1 mt-3 mb-4 text-yellow">{{ post.title }}</h1>
           <p class="lh-1 mb-1">Written by <span class="fw-bold">Andrew Mason</span></p>
@@ -140,7 +145,7 @@ function emailPage(title) {
         <div class="container">
           <div class="row py-5">
             <!-- sidebar -->
-            <div class="col-lg-3 text-end px-4 pb-3 mb-4 order-2 order-lg-1">
+            <div class="col-lg-3 d-none d-lg-flex text-end px-4 pb-3 mb-4 order-2 order-lg-1">
               <div class="row sidebar">
                 <div class="col-sm-12">
                   <p><span class="fw-bold">Return of the Living Dad</span> is a parenting blog by Designer, Frontend Developer, Musician, and Dad, Andrew Mason. It began from a need to record and communicate the pure, destruction waged on the core of my being from two small, difficult humans. It grew to be a format for me to offer real, genuine perspective on parenting when it isn't glossy, isn't glamorous, and isn't at all what the internet says it should be.</p>
@@ -151,7 +156,7 @@ function emailPage(title) {
                     <h3 class="fw-bold m-0" style="letter-spacing: -1px;">{{ item.title }}</h3>
                     <p class="mb-3 text-grey">{{ item.date }}</p>
                     <p class="mb-0" v-html="item.body.slice(0,100) + '...'"></p>
-                    <router-link :to="'/blog/' + item.id">
+                    <router-link :to="'/' + item.id + '/' + item.slug">
                       <button class="btn btn-sm btn-outline-light">More</button>
                     </router-link>
                   </div>
@@ -167,14 +172,14 @@ function emailPage(title) {
               <h5 v-else class="h6 fw-bold text-grey border-bottom pb-4 mb-4">{{ 'Estimated read time ' + wordCount(post.body) + ' mins' }}</h5>
               <p class="fs-5" v-html="post.body"></p>
               <!-- prev/next -->
-              <div class="d-flex my-4">
-                <button v-if="post.id" @click="router.push('/blog/' + --route.params.id)" :class="post.id == 0 ? 'd-none' : ''" class="btn btn-outline-light me-2">Prev</button>
+              <!-- <div class="d-flex my-4">
+                <button v-if="post.id" @click="router.push('/' + --route.params.id + '/' + post.slug)" :class="post.id == 0 ? 'd-none' : ''" class="btn btn-outline-light me-2">Prev</button>
 
-                <button v-if="post.id" :class="post.id == posts.blog.slice(-1)[0].id ? 'd-none' : ''" @click="router.push('/blog/' + ++route.params.id)" class="btn btn-outline-light me-2">Next</button>
-              </div>
+                <button v-if="post.id" :class="post.id == posts.blog.slice(-1)[0].id ? 'd-none' : ''" @click="router.push('/' + ++route.params.id)" class="btn btn-outline-light me-2">Next</button>
+              </div> -->
              
               <!-- share -->
-              <div class=" d-flex py-4 mt-4 border-top">
+              <div class="d-flex py-5 mt-5 border-top">
                 <a :href="shareButton" target="_blank">
                   <button class="btn btn-outline-light p-2 fw-900 fs-5 me-2" style="width: 50px; height: 50px; border-radius: 50%">
                     f
@@ -203,14 +208,37 @@ function emailPage(title) {
                     </svg>
                   </button>
               </div>
-            </div>
+
+              <!-- post footer info -->
+              <post-footer></post-footer>
+            
+            </div><!--end post body-->
       </div>
 
-      <!-- <div class="row">
-        <div class="col-sm-12 p-5">
-          <h2>More</h2>
-        </div>
-      </div> -->
+      <!-- footer more posts -->
+
+      <div class="row text-dark pb-5">
+        <!-- <p class="text-light" v-for="(p, index) in shuffle" :key="index">{{ p.slug }}</p> -->
+        <!-- <p class="text-light" v-for="(item, index) in shuffle(postWithId)" :key="index">{{ item.title }}</p> -->
+          <div class="col-lg-4 p-0" v-for="(item, index) in shuffle(postWithId).slice(0,5)" :key="index" :class="item.id === post.id || item.published == 'false' || item.slug == 'the-genesis'  ? 'd-none' : ''">
+              <div class="m-2 rounded-3 shadow position-relative">
+                <TransitionGroup name="fade">
+                  <div :key="1" @load="loadImage" v-show="!isLoaded" class="page-fade w-100 h-100 object-fit bg-secondary" style="min-height: 200px"></div>
+                  <img :key="2" @load="loadImage" v-show="isLoaded" :src="item.imageUrl" class="fade-in w-100 h-100 object-fit" :alt="post.title">
+                </TransitionGroup>
+                <div class="p-4 bg-warning rounded-bottom" style="min-height: 250px;">
+                  <h5>{{ item.date }}</h5>
+                  <!-- <p> {{ item.published }}</p> -->
+                  <h2 class="fs-1 ls-base mb-3">{{ item.title }}</h2>
+                  <p class="mb-0" v-html="item.body.slice(0,100) + '...'"></p>
+                  <router-link :to="'/' + item.id + '/' + item.slug">
+                    <button class="btn btn-sm btn-outline-dark px-4 rounded-3">Read</button>
+                  </router-link>
+                </div>
+              </div>
+            </div>
+
+      </div>
     </div>
         
     </div>

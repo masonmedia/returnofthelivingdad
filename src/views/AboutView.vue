@@ -1,5 +1,6 @@
 <script setup>
 // import posts from '../data/data.json'
+import { computed } from 'vue';
 import posts from '../content/frontaid.content.json';
 import Layout from '../components/TheLayout.vue';
 import useImageLoader from '../stores/useImageLoader';
@@ -15,17 +16,26 @@ function shorten(text, max) {
   return text && text.length > max ? text.slice(0, max).split(' ').slice(0, -1).join(' ') : text
 }
 
+// generate dynamic id to each post so don't need manual field in CMS
+const postWithId = computed(() => {
+  let arr = posts.blog;
+  for (var i = 0; i < arr.length; i++) {
+    arr[i].id = i + 1;
+  }
+  return arr;
+})
+
 </script>
 
 <template>
   <main>
     <Layout>
       <div class="container-fluid" :style="{'background' : 'url('+ getImageUrl('splatter_yellow', 'png') +') center center no-repeat', 'background-size' : 'cover'}">
-        <div class="row min-vh-100 mt-3 mt-lg-5" :style="{'background' : 'url('+ getImageUrl('splatter_yellow', 'png') +') center left no-repeat'}">
-          <div class="col-xl-8 col-lg-10 d-flex flex-column my-auto p-5">
-            <!-- <h5 class="h4 fw-bold mt-5 mt-lg-0">ROTLD</h5> -->
+        <div class="row min-vh-100 mt-3 mt-lg-5" :style="{'background' : 'url('+ getImageUrl('splatter_yellow', 'png') +') center 10% no-repeat'}">
+          <div class="col-lg-12 d-flex flex-column text-center my-auto p-5">
+            <h5 class="h4 fw-bold mt-5 mt-lg-0">A Dad Magazine</h5>
             <h1 class="text-uppercase" style="-webkit-text-stroke: 1px #FFCC00; filter: drop-shadow(5px 5px 1px goldenrod); line-height: 0.8; letter-spacing: -5px; font-weight: 900; font-size: 26vmin;">About me</h1>
-            <!-- <p class="h4 fw-bold mt-4 pt-2 ls-base">I'm a Dad. Yes, it is like a Zombie movie. <br>These are my stories.</p> -->
+            <p class="h4 fw-bold mt-4 pt-2 ls-base">I'm a Dad. Yes, it is like a Zombie movie. <br>These are my stories.</p>
           </div>
         </div>
 
@@ -49,7 +59,6 @@ function shorten(text, max) {
         <section>
           <div class="row min-vh-100 bg-dark text-light">
             <div class="col-lg-10 d-flex flex-column my-auto p-5">
-              <!-- <h5>I'm a Dad. Yes, it's like a zombie movie.</h5> -->
               <h1 class="display-2 fw-bold lh-1 ls-1 my-3">Going to space, sustainable energy, climate action, curing diseases - ya, these are all great things. Hard things. But none of them involve a screaming, defiant, tantrumming child. <span class="text-warning">And no sleep.</span></h1>
               <p class="h4 py-3">Now I'm not saying, you know, outright, that parenting is harder than engineering a rocket to go to Mars. I'm just saying, that engineering a rocket to go to Mars is easier than parenting. Because engineering a rocket to go to Mars doesn't require you to wrestle an angry, screaming, wriggling, kicking, punching, crying, whining toddler into a car seat he doesn't want to go into. And THEN taking that same angry, screaming, wriggling, kicking, punching, crying, whining toddler for a quiet, calming drive to get groceries. Engineering a rocket to go to Mars must be done in a quiet room. With no kids of any kind. Within 100 kilometers. Oh, and you also need sleep.</p>
             </div>
@@ -74,19 +83,18 @@ function shorten(text, max) {
             <!-- latest -->
             <h2 class="display-2 fw-bold lh-1 ls-1 border-bottom border-warning my-4 p-2 pb-4" style="color: #FFCC00; -webkit-text-stroke: 1px #000; filter: drop-shadow(5px 5px 1px #000);">Latest posts</h2>
             <!-- check if post is published -->
-            <div class="col-lg-4 p-0" v-for="(post, index) in posts.blog.slice(0,4)" :key="index" :class="post.published != 'true' ? 'd-none' : ''">
-              <div class="m-2 bg-warning rounded-3 shadow position-relative" v-if="post.id != 0">
+            <div class="col-lg-4 p-0" v-for="(post, index) in postWithId.slice(0,4)" :key="index" :class="post.published != 'true' ? 'd-none' : ''">
+              <div class="m-2 bg-warning rounded-3 shadow position-relative" v-if="post.id != 0" :class="post.published == 'false' || post.slug == 'the-genesis'  ? 'd-none' : ''">
                 <TransitionGroup name="fade">
-                  <div :key="1" @load="loadImage" v-show="!isLoaded" class="w-100 bg-secondary" style="height: 200px"></div>
-                  <!-- <img :key="1" @load="loadImage" v-if="!isLoaded" class="fade-in bg-secondary w-100 position-absolute start-0 top-0" src="https://placehold.co/1000x400?text=ROTLD" :alt="post.title"> -->
-                  <img :key="2" @load="loadImage" v-show="isLoaded" :src="post.imageUrl" class="fade-in w-100" :alt="post.title" >
+                  <div :key="1" @load="loadImage" v-show="!isLoaded" class="fade-in w-100 bg-secondary" style="min-height: 250px"></div>
+                  <img :key="2" @load="loadImage" v-show="isLoaded" :src="post.imageUrl" class="fade-in w-100 h-100 object-fit" style="min-height: 250px" :alt="post.title" >
                 </TransitionGroup>
                 
                 <div class="p-5" style="min-height: 360px;">
                   <h5>{{ post.date }}</h5>
                   <h2 class="fs-1 ls-base mb-3">{{ post.title }}</h2>
                   <p v-html="shorten(post.body, 175) + '...'"></p>
-                  <router-link :to="'/blog/' + post.id">
+                  <router-link :to="'/' + post.id + '/' + post.slug">
                     <button class="btn btn-dark px-4">More</button>
                   </router-link>
                 </div>

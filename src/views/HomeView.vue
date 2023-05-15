@@ -10,6 +10,7 @@ const { isLoaded } = useImageLoader();
 //   return posts.blog.find(post => post.id === route.params.id)
 // })
 
+// generate dynamic id to each post so don't need manual field in CMS
 const postWithId = computed(() => {
   // var arr = [{name: "John"}, {name: "Jane"}];
   let arr = posts.blog;
@@ -86,7 +87,7 @@ postId();
                   <h5>{{ posts.blog.slice(-1)[0].date }}</h5>
                   <h2 class="display-2 ls-1 fw-900 text-uppercase">{{ posts.blog[6].title }}</h2>
                   <p class="h5 fw-bold my-4" v-html="posts.blog[6].body.substr(0,320) + '...'"></p>
-                  <router-link :to="'/blog/' + posts.blog[6].id">
+                  <router-link :to="'/' + posts.blog[6].id + '/' + posts.blog[6].slug">
                     <button class="btn btn-outline-warning px-4">More</button>
                   </router-link>
                 </div>
@@ -109,7 +110,7 @@ postId();
                   <h5>{{ post.date }}</h5>
                   <h2 class="fs-1 ls-base mb-3">{{ post.title }}</h2>
                   <p v-html="shorten(post.body, 175) + '...'"></p>
-                  <router-link :to="'/blog/' + post.id">
+                  <router-link :to="'/' + post.id + '/' + post.slug">
                     <button class="btn btn-dark px-4">More</button>
                   </router-link>
                 </div>
