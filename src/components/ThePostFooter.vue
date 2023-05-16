@@ -11,7 +11,7 @@
 
         <div class="row border-top border-bottom py-4">
             <div class="col-lg-12">
-                <p class="my-3">The content on this site is produced by Andrew Mason and Return of the Living Dad and is for informational purposes only. While this content comes from long, hard, difficult experience, it is not intended to be used or acted on literally or nor taken as a replacement for professional advice (which is often bullshit and/or doesn't work). Often parenting and all topics covered in this blog are improved through trial and error. Trying this, trying that. Finding something that works. Though I happily offer any and all ideas presented herein as things to try with your kid in similar situations, and hope sincerely that any of it is useful, I suggest before taking any action based on this content, you consult a professional.</p>
+                <p class="my-3">The content on this site is produced by Andrew Mason and Return of the Living Dad and is for entertainment, informational, and support purposes only. While this content comes from long, hard, difficult experience, it is not intended to be used or acted on nor taken as replacement for professional advice (despite often being bullshit and/or ineffective). Parenting, behaviour, and all topics covered in this blog are improved (however slightly) through trial and error. Trying this, trying that. Finding something that works. I happily offer any and all ideas presented herein as things to try with your kid(s) in similar situations, and hope sincerely that any of it is useful. But I suggest before taking any action based on this content, especially anything serious, consult a professional.</p>
             </div>
         </div>
     </div>

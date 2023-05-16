@@ -1,10 +1,20 @@
 <script setup>
 // import posts from '../data/data.json'
 import { computed } from 'vue';
+import { useSeoMeta } from 'unhead'
 import posts from '../content/frontaid.content.json';
 import Layout from '../components/TheLayout.vue';
 import useImageLoader from '../stores/useImageLoader';
 const { isLoaded } = useImageLoader();
+
+useSeoMeta({
+  title: 'Return of the Living Dad | About',
+  description: "Return of the Living Dad is a parent blog centered on life with two (difficult) kids. It focuses on the relentless crushing defeat of daily life and the underlying joys that go along with it (sometimes).",
+  ogDescription: 'Return of the Living Dad is a parent blog centered on life with two (difficult) kids. It focuses on the relentless crushing defeat of daily life and the underlying joys that go along with it (sometimes).',
+  ogTitle: 'Return of the Living Dad | About',
+  ogImage: 'https://source.unsplash.com/1200x600?paint,splatter,abstract',
+  twitterCard: 'https://source.unsplash.com/1200x600?paint,splatter,abstract',
+})
 
 // image paths
 function getImageUrl(name, ext) {

@@ -16,11 +16,13 @@
     "@popperjs/core": "^2.11.7",
     "bootstrap": "^5.2.3",
     "pinia": "^2.0.32",
+    "unhead": "^1.1.26",
     "vue": "^3.2.47",
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.2.0",
+    "@unhead/addons": "^1.1.26",
     "@vitejs/plugin-vue": "^4.0.0",
     "@vue/eslint-config-prettier": "^7.1.0",
     "@vue/test-utils": "^2.3.0",

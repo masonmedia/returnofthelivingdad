@@ -1,6 +1,7 @@
 <script setup>
 // import posts from '../data/data.json'
 import { computed } from 'vue'
+import { useSeoMeta } from 'unhead'
 import posts from '../content/frontaid.content.json';
 import Layout from '../components/TheLayout.vue';
 import useImageLoader from '../stores/useImageLoader';
@@ -9,6 +10,16 @@ const { isLoaded } = useImageLoader();
 // const post = computed(() => {
 //   return posts.blog.find(post => post.id === route.params.id)
 // })
+
+// seo/head
+useSeoMeta({
+  title: 'Return of the Living Dad',
+  description: "Return of the Living Dad is a parent blog centered on life with two (difficult) kids. It focuses on the relentless crushing defeat of daily life and the underlying joys that go along with it (sometimes).",
+  ogDescription: 'Return of the Living Dad is a parent blog centered on life with two (difficult) kids. It focuses on the relentless crushing defeat of daily life and the underlying joys that go along with it (sometimes).',
+  ogTitle: 'Return of the Living Dad',
+  ogImage: 'https://source.unsplash.com/1200x600?paint,splatter,abstract',
+  twitterCard: 'https://source.unsplash.com/1200x600?paint,splatter,abstract',
+})
 
 // generate dynamic id to each post so don't need manual field in CMS
 const postWithId = computed(() => {
@@ -20,6 +31,8 @@ const postWithId = computed(() => {
   return arr;
 })
 
+console.log(postWithId)
+
 // image paths
 function getImageUrl(name, ext) {
   return new URL(`../assets/img/${name}.${ext}`, import.meta.url).href
@@ -30,14 +43,13 @@ function shorten(text, max) {
   return text && text.length > max ? text.slice(0, max).split(' ').slice(0, -1).join(' ') : text
 }
 
-function postId() {
-  let arr = posts.blog;
-  for (var i = 0; i < arr.length; i++) {
-    arr[i].id = i + 1;
-  }
-  console.log(arr);
+// get first two sentences for latest post descriptions
+function postDescription(arr) {
+  const sentences = arr.match(/[^\.!\?]+[\.!\?]+/g);
+  // Concatenate the first two sentences
+  const firstTwoSentences = sentences.slice(0, 2).join(" ");
+  return firstTwoSentences;
 }
-postId();
 
 </script>
 
@@ -77,17 +89,17 @@ postId();
             <div class="col-lg-6 p-0 position-relative">
               <TransitionGroup name="fade">
                   <div :key="1" @load="loadImage" v-show="!isLoaded" class="page-fade w-100 h-100 object-fit bg-secondary" style="min-height: 500px"></div>
-                  <img :key="2" @load="loadImage" v-show="isLoaded" :src="posts.blog[6].imageUrl" class="fade-in w-100 h-100 object-fit" style="min-height: 250px" :alt="posts.blog[6].title" >
+                  <img :key="2" @load="loadImage" v-show="isLoaded" :src="postWithId[0].imageUrl" class="fade-in w-100 h-100 object-fit" style="min-height: 250px" :alt="postWithId[0].title" >
                   <!-- posts.blog.slice(-1)[0].title -->
                 </TransitionGroup>
             </div>
             <div class="col-lg-6 d-flex my-auto">
                 <div class="p-5" style="min-height: 300px;">
                   <img style="width: 150px;" :src="getImageUrl('splatter_yellow', 'png')" alt="">
-                  <h5>{{ posts.blog.slice(-1)[0].date }}</h5>
-                  <h2 class="display-2 ls-1 fw-900 text-uppercase">{{ posts.blog[6].title }}</h2>
-                  <p class="h5 fw-bold my-4" v-html="posts.blog[6].body.substr(0,320) + '...'"></p>
-                  <router-link :to="'/' + posts.blog[6].id + '/' + posts.blog[6].slug">
+                  <h5>{{ postWithId[0].date }}</h5>
+                  <h2 class="display-2 ls-1 fw-900 text-uppercase">{{ postWithId[0].title }}</h2>
+                  <div class="h5 fw-bold my-4" v-html="postWithId[0].body.substr(0,320) + '...'"></div>
+                  <router-link :to="'/' + postWithId[0].id + '/' + postWithId[0].slug">
                     <button class="btn btn-outline-warning px-4">More</button>
                   </router-link>
                 </div>
@@ -100,8 +112,9 @@ postId();
             <!-- latest -->
             <h2 class="display-2 fw-bold lh-1 ls-1 border-bottom border-dark my-4 p-2 pb-4">Latest</h2>
             <!-- check if post is published -->
-            <div class="col-lg-4 p-0" v-for="(post, index) in postWithId" :key="index" :class="post.published !== 'true' ? 'd-none' : ''">
-              <div class="m-2 bg-dark rounded-3 shadow position-relative" v-if="post.slug != 'the-genesis'">
+            <div class="col-lg-4 p-0" v-for="(post, index) in postWithId" :key="index" 
+            v-show="post.published === 'true' && post.published !== '' && post.slug !== 'the-genesis'">
+              <div class="m-2 bg-dark rounded-3 shadow position-relative">
                 <TransitionGroup name="fade">
                   <div :key="1" @load="loadImage" v-show="!isLoaded" class="fade-in w-100 bg-secondary" style="min-height: 250px"></div>
                   <img :key="2" @load="loadImage" v-show="isLoaded" :src="post.imageUrl" class="fade-in w-100 h-100 object-fit" style="min-height: 250px" :alt="post.title" >
@@ -109,7 +122,8 @@ postId();
                 <div class="p-5 bg-warning rounded-bottom" style="min-height: 360px;">
                   <h5>{{ post.date }}</h5>
                   <h2 class="fs-1 ls-base mb-3">{{ post.title }}</h2>
-                  <p v-html="shorten(post.body, 175) + '...'"></p>
+                  <div v-html="postDescription(post.body)"></div>
+                  <!-- <p v-html="shorten(post.body, 175) + '...'"></p> -->
                   <router-link :to="'/' + post.id + '/' + post.slug">
                     <button class="btn btn-dark px-4">More</button>
                   </router-link>

@@ -2,6 +2,7 @@
 
 import { ref, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+// import { useHead } from 'unhead'
 import posts from '../content/frontaid.content.json'
 import Layout from '../components/TheLayout.vue';
 import PostFooter from '../components/ThePostFooter.vue';
@@ -33,13 +34,16 @@ const post = computed(() => {
 
 // add dynamic id to posts for display
 const postWithId = computed(() => {
-  // var arr = [{name: "John"}, {name: "Jane"}];
   let arr = posts.blog;
   for (var i = 0; i < arr.length; i++) {
     arr[i].id = i + 1;
   }
   return arr;
 })
+
+// const description = ref('My amazing site.')
+// const name = ref('Fucking name man')
+// let seoTitle = ref(postWithId[2].title)
 
 // const post = ref({});
 
@@ -88,7 +92,6 @@ function copyToClipboard() {
 }
 
 // email page
-
 function emailPage(title) {
   const href = "mailto:?";
   const url = encodeURIComponent(window.location.href.slice(7));
@@ -96,15 +99,7 @@ function emailPage(title) {
   return emailShare;
 }
 
-// const shuffle = computed(() => {
-//   let array = posts.blog;
-//   for (let i = array.length - 1; i > 0; i--) {
-//     const j = Math.floor(Math.random() * (i + 1));
-//     [array[i], array[j]] = [array[j], array[i]];
-//   }
-//   return array;
-// })
-
+// shuffle posts
 function shuffle(array) {
   let currentIndex = array.length,  randomIndex;
   while (currentIndex != 0) {
@@ -117,6 +112,11 @@ function shuffle(array) {
   return array;
 }
 
+// get first sentence of body for description
+function postDescription(arr) {
+  const firstSentence = arr.match(/^[^?!.]+[?!.]/)[0];
+  return firstSentence;
+}
 
 </script>
 
@@ -127,6 +127,7 @@ function shuffle(array) {
         <div class="col-lg-6 d-flex flex-column justify-content-center align-items-center min-vh-50 text-center p-5">
           <h5 class="fs-5 lh-1 mb-0">Return of the Living Dad</h5>
           <h1 class="display-2 fw-900 lh-1 ls-1 mt-3 mb-4 text-yellow">{{ post.title }}</h1>
+          <div class="fs-4 lh-1 mb-2 fw-light col-md-8" v-html="postDescription(post.body)"></div>
           <p class="lh-1 mb-1">Written by <span class="fw-bold">Andrew Mason</span></p>
           <p v-if="post.date" class="lh-1">On <span class="fw-bold">{{ post.date }}</span></p>
           <div class="d-flex">
@@ -151,7 +152,8 @@ function shuffle(array) {
                   <p><span class="fw-bold">Return of the Living Dad</span> is a parenting blog by Designer, Frontend Developer, Musician, and Dad, Andrew Mason. It began from a need to record and communicate the pure, destruction waged on the core of my being from two small, difficult humans. It grew to be a format for me to offer real, genuine perspective on parenting when it isn't glossy, isn't glamorous, and isn't at all what the internet says it should be.</p>
                 </div>
                 <hr class="my-3">
-                <div class="col-sm-12 p-3 border-bottom" v-for="(item, index) in postWithId.slice(1, 4)" :key="index" :class="item.id === post.id ? 'd-none' : ''">
+                <div class="col-sm-12 p-3 border-bottom" v-for="(item, index) in postWithId.slice(1, 6)" :key="index" 
+                v-show="item.id !== post.id && item.published === 'true' && item.slug !== 'the-genesis'">
                   <div class="pb-3">
                     <h3 class="fw-bold m-0" style="letter-spacing: -1px;">{{ item.title }}</h3>
                     <p class="mb-3 text-grey">{{ item.date }}</p>
@@ -170,7 +172,7 @@ function shuffle(array) {
               <!-- <h5 class="h6 fw-bold text-secondary border-bottom pb-4 mb-4">{{ 'Estimated read time ' + readingTime(post.body + post.title) + ' mins' }}</h5> -->
               <h5 v-if="wordCount(post.body) <= 1" class="h6 fw-bold text-secondary border-bottom pb-4 mb-4">{{ 'Estimated read time ' + wordCount(post.body) + ' min' }}</h5>
               <h5 v-else class="h6 fw-bold text-grey border-bottom pb-4 mb-4">{{ 'Estimated read time ' + wordCount(post.body) + ' mins' }}</h5>
-              <p class="fs-5" v-html="post.body"></p>
+              <div class="fs-5" v-html="post.body"></div>
               <!-- prev/next -->
               <!-- <div class="d-flex my-4">
                 <button v-if="post.id" @click="router.push('/' + --route.params.id + '/' + post.slug)" :class="post.id == 0 ? 'd-none' : ''" class="btn btn-outline-light me-2">Prev</button>
@@ -218,13 +220,12 @@ function shuffle(array) {
       <!-- footer more posts -->
 
       <div class="row text-dark pb-5">
-        <!-- <p class="text-light" v-for="(p, index) in shuffle" :key="index">{{ p.slug }}</p> -->
-        <!-- <p class="text-light" v-for="(item, index) in shuffle(postWithId)" :key="index">{{ item.title }}</p> -->
-          <div class="col-lg-4 p-0" v-for="(item, index) in shuffle(postWithId).slice(0,5)" :key="index" :class="item.id === post.id || item.published == 'false' || item.slug == 'the-genesis'  ? 'd-none' : ''">
+          <div class="col-lg-4 p-0" v-for="(item, index) in postWithId.slice(1,6)" :key="index" 
+          v-show="item.id !== post.id && item.published === 'true' && item.published !== '' && item.slug !== 'the-genesis'">
               <div class="m-2 rounded-3 shadow position-relative">
                 <TransitionGroup name="fade">
                   <div :key="1" @load="loadImage" v-show="!isLoaded" class="page-fade w-100 h-100 object-fit bg-secondary" style="min-height: 200px"></div>
-                  <img :key="2" @load="loadImage" v-show="isLoaded" :src="item.imageUrl" class="fade-in w-100 h-100 object-fit" :alt="post.title">
+                  <img :key="2" @load="loadImage" v-show="isLoaded" :src="item.imageUrl" class="fade-in w-100 h-100 object-fit" :alt="item.title">
                 </TransitionGroup>
                 <div class="p-4 bg-warning rounded-bottom" style="min-height: 250px;">
                   <h5>{{ item.date }}</h5>
