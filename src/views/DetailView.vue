@@ -74,9 +74,12 @@ function wordCount(str) {
 // }
 
 // fb share btn
-const fbShare = "https://www.facebook.com/sharer/sharer.php?u=";
-const url = window.location.href.slice(7);
-const shareButton = fbShare + url;
+function fbShare() {
+  const fbShare = "https://www.facebook.com/sharer/sharer.php?u=";
+  const url = window.location.href.slice(7);
+  const shareButton = fbShare + url;
+  return shareButton;
+}
 
 // twitter share btn
 function tweetCurrentPage(title) {
@@ -182,7 +185,7 @@ function postDescription(arr) {
              
               <!-- share -->
               <div class="d-flex py-5 mt-5 border-top">
-                <a :href="shareButton" target="_blank">
+                <a :href="fbShare()" target="_blank">
                   <button class="btn btn-outline-light p-2 fw-900 fs-5 me-2" style="width: 50px; height: 50px; border-radius: 50%">
                     f
                   </button>
@@ -220,7 +223,7 @@ function postDescription(arr) {
       <!-- footer more posts -->
 
       <div class="row text-dark pb-5">
-          <div class="col-lg-4 p-0" v-for="(item, index) in postWithId.slice(1,6)" :key="index" 
+          <div class="col-lg-4 p-0" v-for="(item, index) in postWithId.slice(1,5)" :key="index" 
           v-show="item.id !== post.id && item.published === 'true' && item.published !== '' && item.slug !== 'the-genesis'">
               <div class="m-2 rounded-3 shadow position-relative">
                 <TransitionGroup name="fade">
