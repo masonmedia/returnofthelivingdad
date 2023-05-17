@@ -223,7 +223,7 @@ function postDescription(arr) {
       <!-- footer more posts -->
 
       <div class="row text-dark pb-5">
-          <div class="col-lg-4 p-0" v-for="(item, index) in postWithId.slice(1,5)" :key="index" 
+          <div class="col-lg-4 p-0" v-for="(item, index) in postWithId" :key="index" 
           v-show="item.id !== post.id && item.published === 'true' && item.published !== '' && item.slug !== 'the-genesis'">
               <div class="m-2 rounded-3 shadow position-relative">
                 <TransitionGroup name="fade">
