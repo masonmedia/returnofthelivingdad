@@ -56,7 +56,7 @@ function postDescription(arr) {
   <main>
     <Layout>
       <div class="container-fluid" :style="{'background' : 'url('+ getImageUrl('splatter_yellow', 'png') +') center right no-repeat', 'background-size' : 'cover'}">        
-        <div class="row min-vh-100 mt-3 mt-lg-5" :style="{'background' : 'url('+ getImageUrl('splatter_yellow', 'png') +') center 40% no-repeat'}">
+        <div class="row min-vh-100 mt-0 mt-lg-5" :style="{'background' : 'url('+ getImageUrl('splatter_yellow', 'png') +') center 40% no-repeat'}">
           <div class="col-xl-9 offset-xl-2 col-lg-10 d-flex flex-column my-auto p-5">
             <h5 class="h4 fw-bold">A Dad Magazine</h5>
             <h1 class="text-uppercase" style="-webkit-text-stroke: 1px #FFCC00; filter: drop-shadow(15px 15px 5px goldenrod); line-height: 0.8; letter-spacing: -5px; font-weight: 900; font-size: 25vmin;">Return of the living Dad</h1>
