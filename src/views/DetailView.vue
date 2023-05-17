@@ -116,9 +116,17 @@ function shuffle(array) {
 }
 
 // get first sentence of body for description
-function postDescription(arr) {
+function postIntro(arr) {
   const firstSentence = arr.match(/^[^?!.]+[?!.]/)[0];
   return firstSentence;
+}
+
+// get first two sentences for latest post descriptions
+function postDescription(arr) {
+  const sentences = arr.match(/[^\.!\?]+[\.!\?]+/g);
+  // Concatenate the first two sentences
+  const firstTwoSentences = sentences.slice(0, 2).join(" ");
+  return firstTwoSentences;
 }
 
 </script>
@@ -130,7 +138,7 @@ function postDescription(arr) {
         <div class="col-lg-6 d-flex flex-column justify-content-center align-items-center min-vh-50 text-center p-5">
           <h5 class="fs-5 lh-1 mb-0">Return of the Living Dad</h5>
           <h1 class="display-2 fw-900 lh-1 ls-1 mt-3 mb-4 text-yellow">{{ post.title }}</h1>
-          <div class="fs-4 lh-1 mb-2 fw-light col-md-8" v-html="postDescription(post.body)"></div>
+          <div class="fs-4 lh-1 mb-2 fw-900 col-md-8" v-html="postIntro(post.body)"></div>
           <p class="lh-1 mb-1">Written by <span class="fw-bold">Andrew Mason</span></p>
           <p v-if="post.date" class="lh-1">On <span class="fw-bold">{{ post.date }}</span></p>
           <div class="d-flex">
@@ -230,13 +238,13 @@ function postDescription(arr) {
                   <div :key="1" @load="loadImage" v-show="!isLoaded" class="page-fade w-100 h-100 object-fit bg-secondary" style="min-height: 200px"></div>
                   <img :key="2" @load="loadImage" v-show="isLoaded" :src="item.imageUrl" class="fade-in w-100 h-100 object-fit" :alt="item.title">
                 </TransitionGroup>
-                <div class="p-4 bg-warning rounded-bottom" style="min-height: 250px;">
+                <div class="p-5 bg-warning rounded-bottom" style="min-height: 360px;">
                   <h5>{{ item.date }}</h5>
                   <!-- <p> {{ item.published }}</p> -->
                   <h2 class="fs-1 ls-base mb-3">{{ item.title }}</h2>
-                  <p class="mb-0" v-html="item.body.slice(0,100) + '...'"></p>
+                  <div class="mb-0" v-html="postDescription(item.body)"></div>
                   <router-link :to="'/' + item.id + '/' + item.slug">
-                    <button class="btn btn-sm btn-outline-dark px-4 rounded-3">Read</button>
+                    <button class="btn btn-sm btn-dark px-4 rounded-3">Read</button>
                   </router-link>
                 </div>
               </div>

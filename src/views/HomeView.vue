@@ -21,11 +21,8 @@ useSeoMeta({
   twitterCard: 'https://returnofthelivingdad.com/assets/img/zombie.jpeg',
 })
 
-// https://source.unsplash.com/1200x600?paint,splatter,abstract
-
 // generate dynamic id to each post so don't need manual field in CMS
 const postWithId = computed(() => {
-  // var arr = [{name: "John"}, {name: "Jane"}];
   let arr = posts.blog;
   for (var i = 0; i < arr.length; i++) {
     arr[i].id = i + 1;
@@ -60,9 +57,9 @@ function postDescription(arr) {
     <Layout>
       <div class="container-fluid" :style="{'background' : 'url('+ getImageUrl('splatter_yellow', 'png') +') center right no-repeat', 'background-size' : 'cover'}">        
         <div class="row min-vh-100 mt-3 mt-lg-5" :style="{'background' : 'url('+ getImageUrl('splatter_yellow', 'png') +') center 40% no-repeat'}">
-          <div class="col-xl-8 offset-xl-2 col-lg-10 d-flex flex-column my-auto p-5">
+          <div class="col-xl-9 offset-xl-2 col-lg-10 d-flex flex-column my-auto p-5">
             <h5 class="h4 fw-bold mt-5 mt-lg-0">A Dad Magazine</h5>
-            <h1 class="text-uppercase" style="-webkit-text-stroke: 1px #FFCC00; filter: drop-shadow(15px 15px 5px goldenrod); line-height: 0.8; letter-spacing: -5px; font-weight: 900; font-size: 26vmin;">Return of the living Dad</h1>
+            <h1 class="text-uppercase" style="-webkit-text-stroke: 1px #FFCC00; filter: drop-shadow(15px 15px 5px goldenrod); line-height: 0.8; letter-spacing: -5px; font-weight: 900; font-size: 25vmin;">Return of the living Dad</h1>
             <p class="h4 fw-bold mt-4 pt-2 ls-base">I'm a Dad. Yes, it is like a Zombie movie. <br>These are my stories.</p>
           </div>
         </div>
@@ -127,7 +124,7 @@ function postDescription(arr) {
                   <div v-html="postDescription(post.body)"></div>
                   <!-- <p v-html="shorten(post.body, 175) + '...'"></p> -->
                   <router-link :to="'/' + post.id + '/' + post.slug">
-                    <button class="btn btn-dark px-4">More</button>
+                    <button class="btn btn-dark px-4 rounded-3">More</button>
                   </router-link>
                 </div>
               </div>
