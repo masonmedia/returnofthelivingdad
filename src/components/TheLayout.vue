@@ -4,7 +4,7 @@ import Footer from '../components/TheFooter.vue'
 </script>
 
 <template>
-    <div>
+    <div style="overflow-x: hidden;">
         <!-- <Nav></Nav> -->
             <slot></slot>
         <Footer></Footer>
