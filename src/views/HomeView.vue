@@ -93,7 +93,7 @@ function postDescription(arr) {
                 </TransitionGroup>
             </div>
             <div class="col-lg-6 d-flex my-auto">
-                <div class="p-5" style="min-height: 300px;">
+                <div class="p-4 p-lg-5" style="min-height: 300px;">
                   <img style="width: 150px;" :src="getImageUrl('splatter_yellow', 'png')" alt="">
                   <h5>{{ postWithId[0].date }}</h5>
                   <h2 class="display-2 ls-1 fw-900 text-uppercase">{{ postWithId[0].title }}</h2>
