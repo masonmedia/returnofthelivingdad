@@ -136,8 +136,8 @@ function postDescription(arr) {
     <div class="container-fluid text-light">
       <div class="row min-vh-100 mt-5 mt-lg-0">
         <div class="col-lg-6 d-flex flex-column justify-content-center align-items-center min-vh-50 text-center p-5">
-          <h5 class="fs-5 lh-1 mb-0">Return of the Living Dad</h5>
-          <h1 class="display-2 fw-900 lh-1 ls-1 mt-3 mb-4 text-yellow">{{ post.title }}</h1>
+          <h5 class="fs-5 lh-1 mb-0 mt-4 mt-lg-0">Return of the Living Dad</h5>
+          <h1 class="fw-900 lh-1 ls-1 mt-3 mb-4 text-yellow" style="font-size: 13vmin;">{{ post.title }}</h1>
           <div class="fs-4 lh-1 mb-2 fw-900 col-md-8" v-html="postIntro(post.body)"></div>
           <p class="lh-1 mb-1">Written by <span class="fw-bold">Andrew Mason</span></p>
           <p v-if="post.date" class="lh-1">On <span class="fw-bold">{{ post.date }}</span></p>
