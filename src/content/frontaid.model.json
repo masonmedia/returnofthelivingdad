@@ -37,6 +37,7 @@
             }
         },
         "title": {":type": "line"},
+        "description": {":type": "line"},
         "body":  {":type": "text", ":richtext": true}
         }
       }
