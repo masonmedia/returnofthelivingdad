@@ -179,7 +179,7 @@ function postDescription(arr) {
 
             <!-- post body -->
             <div class="col-lg-9 px-4 order-1 order-lg-2">
-              <h1 class="display-4 fw-900 lh-1 ls-1 mb-3">{{ post.title }}</h1>
+              <h1 class="display-3 fw-900 lh-1 ls-1 mb-3">{{ post.title }}</h1>
               <!-- <h5 class="h6 fw-bold text-secondary border-bottom pb-4 mb-4">{{ 'Estimated read time ' + readingTime(post.body + post.title) + ' mins' }}</h5> -->
               <h5 v-if="wordCount(post.body) <= 1" class="h6 fw-bold text-secondary border-bottom pb-4 mb-4">{{ 'Estimated read time ' + wordCount(post.body) + ' min' }}</h5>
               <h5 v-else class="h6 fw-bold text-grey border-bottom pb-4 mb-4">{{ 'Estimated read time ' + wordCount(post.body) + ' mins' }}</h5>

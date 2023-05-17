@@ -55,8 +55,8 @@ const postWithId = computed(() => {
               <img class="w-100 h-100 object-fit" :src="getImageUrl('zombie_transparent', 'png')" alt="">
             </div>
             <div class="col-lg-6 d-flex my-auto">
-                <div class="p-5" style="min-height: 300px;">
-                  <img style="width: 150px;" :src="getImageUrl('splatter_yellow', 'png')" alt="">
+                <div class="p-4 p-lg-5" style="min-height: 300px;">
+                  <img class="mb-3" style="width: 150px;" :src="getImageUrl('splatter_yellow', 'png')" alt="">
                   <h5>About me</h5>
                   <h2 class="display-2 ls-1 fw-900 text-uppercase">Dad, zombie, and a couple other things.</h2>
                   <p class="h4 fw-bold my-4">I'm Andrew. I'm a musician, frontend developer, designer, and writer, I'm also a Dad. It's the single greatest challenge I've undertaken as a human.</p>
@@ -81,7 +81,7 @@ const postWithId = computed(() => {
               <img class="w-100 h-100 object-fit" :src="getImageUrl('splatter_yellow', 'png')" alt="">
 
             </div>
-            <div class="col-lg-8 d-flex flex-column my-auto p-5">
+            <div class="col-lg-8 d-flex flex-column my-auto p-4 p-lg-5">
               <h1 class="display-2 fw-bold lh-1 ls-1 my-3">I have two beautiful, unique, creative, amazing, difficult, defiant, persistent, determined, and funny boys.</h1>
               <p class="h4 py-3">I am thankful for them every day. I am also destroyed by them evey day. And it is this destruction that fuels my writing. This blog is an outlet to rant about my life and experience as a Dad. But it's also, I hope, something that might give other parents like me out there a bit of ease, a bit of support, knowing that the reality belies the internet. Raising kids is brutal. It's f*#$ed.</p>
             </div>
