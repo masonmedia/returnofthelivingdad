@@ -1,7 +1,9 @@
 <template>
     <div class="w-100">
         <nav class="navbar container-fluid p-1 bg-dark w-100 d-lg-none d-flex fixed-top">
-            <router-link class="font-antonio fw-bold ls-base p-3 fs-2" style="color: #FFCC00" to="/">ROTLD</router-link>
+            <router-link class="font-antonio fw-bold ls-base p-3 fs-2" style="color: #FFCC00" to="/">
+                <img style="width: 40px;" class="mt-1" :src="getImageUrl('rld_logo_trans', 'png')" alt="">
+            </router-link>
             <!-- menu -->
             <button class="btn ms-auto my-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasResponsive" aria-controls="offcanvasResponsive">
                 <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="#FFCC00" class="bi bi-justify-right" viewBox="0 0 16 16">
@@ -13,7 +15,8 @@
         <nav class="navbar p-3 fixed-top d-none d-lg-block font-antonio text-uppercase bg-dark text-light w-100">
             <div class="container-fluid">
                 <router-link class="fw-bold ls-base fs-2" style="color: #FFCC00" to="/">
-                    ROTLD</router-link>
+                    <img style="width: 45px;" :src="getImageUrl('rld_logo_trans', 'png')" alt="">
+                </router-link>
                 <ul class="nav justify-content-end fs-5">
                     <router-link class="nav-link" v-for="(route, index) in router.options.routes.slice(0,2)" :key="index"
                     :to="route.path">
@@ -26,7 +29,8 @@
 
         <div class="offcanvas offcanvas-end border-bottom w-100 font-antonio bg-dark text-warning" tabindex="-1" id="offcanvasResponsive" aria-labelledby="offcanvasRightLabel">
             <div class="offcanvas-header">
-                <h5 class="offcanvas-title font-antonio fw-bold ls-base fs-2">ROTLD</h5>
+                <!-- <h5 class="offcanvas-title font-antonio fw-bold ls-base fs-2">ROTLD</h5> -->
+                <img style="width: 45px;" class="pt-1" :src="getImageUrl('rld_logo_trans', 'png')" alt="">
                 <button class="btn pt-0 pe-0" role="button" data-bs-dismiss="offcanvas" aria-label="Close">
                     <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="text-warning bi bi-x-lg" viewBox="0 0 16 16">
                         <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
@@ -53,9 +57,13 @@
 <script setup>
 
 import { useRoute, useRouter } from "vue-router";
-const location = useRoute();
+// const location = useRoute();
 const router = useRouter();
 
+// image paths
+function getImageUrl(name, ext) {
+  return new URL(`../assets/img/${name}.${ext}`, import.meta.url).href
+}
 </script>
 
 <style scoped>

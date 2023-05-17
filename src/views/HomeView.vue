@@ -80,7 +80,8 @@ function postDescription(arr) {
           <div class="row">
             <!-- about -->
             <div class="col-lg-12 pt-5">
-                <h2 class="display-2 fw-bold lh-1 ls-1 border-bottom border-dark p-2 py-4">About ROTLD</h2>
+                <!-- <h2 class="display-2 fw-bold lh-1 ls-1 border-bottom border-dark p-2 py-4">About ROTLD</h2> -->
+                <h2 class="display-2 fw-bold lh-1 ls-1 border-bottom border-warning my-4 p-2 pb-4" style="color: #FFCC00; -webkit-text-stroke: 1px #000; filter: drop-shadow(5px 5px 1px #000);">About ROLTD</h2>
             </div>
           </div>
 
@@ -109,7 +110,7 @@ function postDescription(arr) {
         <section>
           <div class="row m-3 mb-0 pb-5 position-relative">
             <!-- latest -->
-            <h2 class="display-2 fw-bold lh-1 ls-1 border-bottom border-dark my-4 p-2 pb-4">Latest</h2>
+            <h2 class="display-2 fw-bold lh-1 ls-1 border-bottom border-warning my-4 p-2 pb-4" style="color: #FFCC00; -webkit-text-stroke: 1px #000; filter: drop-shadow(5px 5px 1px #000);">Latest posts</h2>
             <!-- check if post is published -->
             <div class="col-lg-4 p-0" v-for="(post, index) in postWithId" :key="index" 
             v-show="post.published === 'true' && post.published !== '' && post.slug !== 'the-genesis'">

@@ -1,6 +1,6 @@
 <script setup>
 
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 // import { useHead } from 'unhead'
 import posts from '../content/frontaid.content.json'
@@ -129,16 +129,32 @@ function postDescription(arr) {
   return firstTwoSentences;
 }
 
+// add target blank to all anchor tags inside post body
+function targetBlank() {
+  let section = document.getElementById('post-body');
+  let links = section.getElementsByTagName('a');
+  for (let i = 0; i < links.length; i++) {
+    links[i].setAttribute("target", "_blank");
+  }
+  console.log(section);
+}
+
+// put in mounted to wait for data to load before executing
+onMounted(() => {
+  targetBlank();
+})
+
 </script>
 
 <template>
   <Layout>
     <div class="container-fluid text-light">
       <div class="row min-vh-100 mt-5 mt-lg-0">
-        <div class="col-lg-6 d-flex flex-column justify-content-center align-items-center min-vh-50 text-center p-5">
+        <div class="col-lg-6 d-flex flex-column justify-content-center align-items-center min-vh-75 text-center p-5">
           <h5 class="fs-5 lh-1 mb-0 mt-4 mt-lg-0">Return of the Living Dad</h5>
           <h1 class="fw-900 lh-1 ls-1 mt-3 mb-4 text-yellow" style="font-size: 13vmin;">{{ post.title }}</h1>
-          <div class="fs-4 lh-1 mb-2 fw-900 col-md-8" v-html="postIntro(post.body)"></div>
+          <div v-if="post.description" class="fs-4 lh-1 mb-2 fw-900 col-md-8" v-html="post.description"></div>
+          <div v-else class="fs-4 lh-1 mb-2 fw-900 col-md-8" v-html="postIntro(post.body)"></div>
           <p class="lh-1 mb-1">Written by <span class="fw-bold">Andrew Mason</span></p>
           <p v-if="post.date" class="lh-1">On <span class="fw-bold">{{ post.date }}</span></p>
           <div class="d-flex">
@@ -168,7 +184,7 @@ function postDescription(arr) {
                   <div class="pb-3">
                     <h3 class="fw-bold m-0" style="letter-spacing: -1px;">{{ item.title }}</h3>
                     <p class="mb-3 text-grey">{{ item.date }}</p>
-                    <p class="mb-0" v-html="item.body.slice(0,100) + '...'"></p>
+                    <div class="mb-0" v-html="item.body.slice(0,100) + '...'"></div>
                     <router-link :to="'/' + item.id + '/' + item.slug">
                       <button class="btn btn-sm btn-outline-light">More</button>
                     </router-link>
@@ -183,7 +199,7 @@ function postDescription(arr) {
               <!-- <h5 class="h6 fw-bold text-secondary border-bottom pb-4 mb-4">{{ 'Estimated read time ' + readingTime(post.body + post.title) + ' mins' }}</h5> -->
               <h5 v-if="wordCount(post.body) <= 1" class="h6 fw-bold text-secondary border-bottom pb-4 mb-4">{{ 'Estimated read time ' + wordCount(post.body) + ' min' }}</h5>
               <h5 v-else class="h6 fw-bold text-grey border-bottom pb-4 mb-4">{{ 'Estimated read time ' + wordCount(post.body) + ' mins' }}</h5>
-              <div class="fs-5" v-html="post.body"></div>
+              <div id="post-body" class="fs-5" v-html="post.body"></div>
               <!-- prev/next -->
               <!-- <div class="d-flex my-4">
                 <button v-if="post.id" @click="router.push('/' + --route.params.id + '/' + post.slug)" :class="post.id == 0 ? 'd-none' : ''" class="btn btn-outline-light me-2">Prev</button>
