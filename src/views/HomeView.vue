@@ -17,8 +17,8 @@ useSeoMeta({
   description: "Return of the Living Dad is a parent blog centered on life with two (difficult) kids. It focuses on the relentless crushing defeat of daily life and the underlying joys that go along with it (sometimes).",
   ogDescription: 'Return of the Living Dad is a parent blog centered on life with two (difficult) kids. It focuses on the relentless crushing defeat of daily life and the underlying joys that go along with it (sometimes).',
   ogTitle: 'Return of the Living Dad',
-  ogImage: 'https://returnofthelivingdad.com/assets/img/zombie.jpeg',
-  twitterCard: 'https://returnofthelivingdad.com/assets/img/zombie.jpeg',
+  ogImage: 'https://images.unsplash.com/photo-1637858868799-7f26a0640eb6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80',
+  twitterCard: 'https://images.unsplash.com/photo-1637858868799-7f26a0640eb6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80',
 })
 
 // generate dynamic id to each post so don't need manual field in CMS
@@ -120,8 +120,8 @@ function postDescription(arr) {
                 <div class="p-5 bg-warning rounded-bottom" style="min-height: 360px;">
                   <h5>{{ post.date }}</h5>
                   <h2 class="fs-1 ls-base mb-3">{{ post.title }}</h2>
-                  <div v-html="postDescription(post.body)"></div>
-                  <!-- <p v-html="shorten(post.body, 175) + '...'"></p> -->
+                  <!-- <div v-html="postDescription(post.body)"></div> -->
+                  <div v-html="shorten(post.body, 175) + '...'"></div>
                   <router-link :to="'/' + post.id + '/' + post.slug">
                     <button class="btn btn-dark px-4 rounded-3">More</button>
                   </router-link>

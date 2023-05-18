@@ -2,7 +2,7 @@
 
 import { ref, computed, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-// import { useHead } from 'unhead'
+import { useSeoMeta } from 'unhead'
 import posts from '../content/frontaid.content.json'
 import Layout from '../components/TheLayout.vue';
 import PostFooter from '../components/ThePostFooter.vue';
@@ -39,6 +39,15 @@ const postWithId = computed(() => {
     arr[i].id = i + 1;
   }
   return arr;
+})
+
+useSeoMeta({
+  title: 'Return of the Living Dad',
+  description: "Return of the Living Dad is a parent blog centered on life with two (difficult) kids. It focuses on the relentless crushing defeat of daily life and the underlying joys that go along with it (sometimes).",
+  ogDescription: 'Return of the Living Dad is a parent blog centered on life with two (difficult) kids. It focuses on the relentless crushing defeat of daily life and the underlying joys that go along with it (sometimes).',
+  ogTitle: 'Return of the Living Dad',
+  ogImage: 'https://images.unsplash.com/photo-1637858868799-7f26a0640eb6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80',
+  twitterCard: 'https://images.unsplash.com/photo-1637858868799-7f26a0640eb6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80',
 })
 
 // const description = ref('My amazing site.')

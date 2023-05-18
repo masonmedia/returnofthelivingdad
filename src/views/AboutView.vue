@@ -104,7 +104,7 @@ const postWithId = computed(() => {
                 <div class="p-5" style="min-height: 360px;">
                   <h5>{{ post.date }}</h5>
                   <h2 class="fs-1 ls-base mb-3">{{ post.title }}</h2>
-                  <p v-html="shorten(post.body, 175) + '...'"></p>
+                  <div v-html="shorten(post.body, 175) + '...'"></div>
                   <router-link :to="'/' + post.id + '/' + post.slug">
                     <button class="btn btn-dark px-4">More</button>
                   </router-link>
