@@ -162,7 +162,7 @@ onMounted(() => {
         <div class="col-lg-6 d-flex flex-column justify-content-center align-items-center min-vh-75 text-center p-5">
           <h5 class="fs-5 lh-1 mb-0 mt-4 mt-lg-0">Return of the Living Dad</h5>
           <h1 class="fw-900 lh-1 ls-1 mt-3 mb-4 text-yellow" style="font-size: 10vmin;">{{ post.title }}</h1>
-          <div v-if="post.description" class="fs-4 lh-1 mb-2 fw-900 col-md-8" v-html="post.description"></div>
+          <div v-if="post.description" class="fs-4 lh-1 mb-3 fw-900 col-md-8" v-html="post.description"></div>
           <div v-else class="fs-4 lh-1 mb-2 fw-900 col-md-8" v-html="postIntro(post.body)"></div>
           <p class="lh-1 mb-1">Written by <span class="fw-bold">Andrew Mason</span></p>
           <p v-if="post.date" class="lh-1">On <span class="fw-bold">{{ post.date }}</span></p>

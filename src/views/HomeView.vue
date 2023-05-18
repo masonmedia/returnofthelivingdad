@@ -48,6 +48,11 @@ function postDescription(arr) {
   return firstTwoSentences;
 }
 
+function oddOrEven(arr) {
+  const even = arr.length % 2 === 0;
+  return even;
+}
+
 </script>
 
 <template>
@@ -110,7 +115,9 @@ function postDescription(arr) {
             <!-- latest -->
             <h2 class="display-2 fw-bold lh-1 ls-1 border-bottom border-warning my-4 p-2 pb-4" style="color: #FFCC00; -webkit-text-stroke: 1px #000; filter: drop-shadow(5px 5px 1px #000);">Latest posts</h2>
             <!-- check if post is published -->
-            <div class="col-lg-4 p-0" v-for="(post, index) in postWithId" :key="index" 
+            <!-- :class="oddOrEven(postWithId) ? 'col-lg-4 col-md-6' : 'col-lg-6'" -->
+            <div 
+            class="col-lg-4 col-md-6 p-0" v-for="(post, index) in postWithId" :key="index" 
             v-show="post.published === 'true' && post.published !== '' && post.slug !== 'the-genesis'">
               <div class="m-2 bg-dark rounded-3 shadow position-relative">
                 <TransitionGroup name="fade">
