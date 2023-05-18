@@ -56,9 +56,9 @@ function postDescription(arr) {
   <main>
     <Layout>
       <div class="container-fluid" :style="{'background' : 'url('+ getImageUrl('splatter_yellow', 'png') +') center right no-repeat', 'background-size' : 'cover'}">        
-        <div class="row min-vh-700 mt-5" :style="{'background' : 'url('+ getImageUrl('splatter_yellow', 'png') +') center 40% no-repeat'}">
+        <div class="row mt-5" style="padding: 6% 0;" :style="{'background' : 'url('+ getImageUrl('splatter_yellow', 'png') +') 83% 40% no-repeat'}">
           <div class="col-xl-10 offset-xl-1 col-lg-12 d-flex flex-column justify-content-center align-items-start p-5">
-            <h5 class="h4 fw-bold mt-4 mt-lg-5">A Dad Magazine</h5>
+            <h5 class="h4 fw-bold">A Dad Magazine</h5>
             <h1 class="text-uppercase" style="-webkit-text-stroke: 1px #FFCC00; filter: drop-shadow(15px 15px 5px goldenrod); line-height: 0.8; letter-spacing: -5px; font-weight: 900; font-size: 25vmin;">Return of the living Dad</h1>
             <p class="h4 fw-bold mt-4 pt-2 ls-base">I'm a Dad. Yes, it is like a Zombie movie. <br>These are my stories.</p>
           </div>
