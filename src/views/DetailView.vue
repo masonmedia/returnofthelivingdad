@@ -173,12 +173,17 @@ onMounted(() => {
         <div class="container">
           <div class="row py-5">
             <!-- sidebar -->
-            <div class="col-lg-3 d-none d-lg-flex text-end px-4 pb-3 mb-4 order-2 order-lg-1">
-              <div class="row sidebar">
+            <div class="col-lg-3 d-none d-lg-flex justify-content-center align-items-start text-end px-4 pb-3 mb-4 order-2 order-lg-1">
+              <div class="row">
+                <!-- removed .sidebar from row until position sticky is worked out -->
                 <div class="col-sm-12">
                   <p><span class="fw-bold">Return of the Living Dad</span> is a parenting blog by Designer, Frontend Developer, Musician, and Dad, Andrew Mason. It began from a need to record and communicate the pure, destruction waged on the core of my being from two small, difficult humans. It grew to be a format for me to offer real, genuine perspective on parenting when it isn't glossy, isn't glamorous, and isn't at all what the internet says it should be.</p>
                 </div>
-                <hr class="my-3">
+                <!-- <hr class="my-3"> -->
+                <div class="col-sm-12 my-4 py-3 text-grey border-top border-bottom border-secondary">
+                  <!-- <hr class="my-3"> -->
+                  <h2 class="lh-1 ls-base fw-900">More posts</h2>
+                </div>
                 <div class="col-sm-12 p-3 border-bottom" v-for="(item, index) in postWithId.slice(1, 6)" :key="index" 
                 v-show="item.id !== post.id && item.published === 'true' && item.slug !== 'the-genesis'">
                   <div class="pb-3">

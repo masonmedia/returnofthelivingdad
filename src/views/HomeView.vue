@@ -30,8 +30,6 @@ const postWithId = computed(() => {
   return arr;
 })
 
-console.log(postWithId)
-
 // image paths
 function getImageUrl(name, ext) {
   return new URL(`../assets/img/${name}.${ext}`, import.meta.url).href
