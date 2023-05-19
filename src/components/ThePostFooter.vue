@@ -5,7 +5,7 @@
                 <h1 class="display-4 fw-900 ls-1 lh-1 text-yellow">Return of the Living Dad</h1>
             </div>
             <div class="col-md-8 d-flex my-auto">
-                <p>Return of the Living Dad is a parenting blog aimed at supporting parents through the insane challenge and total phsycho-physical desitruction that is rainsing young kids. With dark humour and raw uncut detail of harrowing events, ROTL hopes to impart both a base reality of what it is to have difficult kids, and also the underlying (often hidden) joy that goes along with it (sometimes).</p>
+                <p>Return of the Living Dad is a gigantic rant about the madness of raising kids. I mean, it's a parenting blog aimed at supporting parents through the insane challenge and total phsycho-physical destruction that is raising young kids. With dark humour and raw uncut detail of harrowing events, ROTL hopes to impart both a base reality of what it is to have difficult kids, and also the underlying (often hidden) joy that goes along with it (sometimes).</p>
             </div>
         </div>
 
