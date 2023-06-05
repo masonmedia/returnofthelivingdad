@@ -163,11 +163,11 @@ onMounted(() => {
           <h5 class="fs-5 lh-1 mb-0 mt-4 mt-lg-0">Return of the Living Dad</h5>
           <h1 class="fw-900 lh-1 ls-1 mt-3 mb-4 text-yellow" style="font-size: 10vmin;">{{ post.title }}</h1>
           <div v-if="post.description" class="fs-4 lh-1 mb-3 fw-900 col-md-8" v-html="post.description"></div>
-          <div v-else class="fs-4 lh-1 mb-2 fw-900 col-md-8" v-html="postIntro(post.body)"></div>
-          <p class="lh-1 mb-1">Written by <span class="fw-bold">Andrew Mason</span></p>
+          <div v-else class="fs-4 lh-1 mb-2 fw-900 col-md-8" v-html="postDescription(post.body)"></div>
+          <p class="lh-1 mb-2">Written by <span class="fw-bold">Andrew Mason</span></p>
           <p v-if="post.date" class="lh-1">On <span class="fw-bold">{{ post.date }}</span></p>
           <div class="d-flex">
-            <span class="badge text-bg-light me-1" v-for="(tag, index) in post.tags" :key="index">{{ tag.category }}</span>
+            <span class="badge text-bg-light me-1 mt-2" v-for="(tag, index) in post.tags" :key="index">{{ tag.category }}</span>
           </div>
         </div>
         
@@ -261,7 +261,8 @@ onMounted(() => {
       <!-- footer more posts -->
 
       <div class="row text-dark pb-5">
-          <div class="col-lg-4 p-0" v-for="(item, index) in postWithId" :key="index" 
+          <div class="col-lg-4 col-md-6 p-0"
+          v-for="(item, index) in postWithId" :key="index" 
           v-show="item.id !== post.id && item.published === 'true' && item.published !== '' && item.slug !== 'the-genesis'">
               <div class="m-2 rounded-3 shadow position-relative">
                 <TransitionGroup name="fade">
