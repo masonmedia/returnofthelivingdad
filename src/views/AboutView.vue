@@ -12,8 +12,8 @@ useSeoMeta({
   description: "Return of the Living Dad is a parent blog centered on life with two (difficult) kids. It focuses on the relentless crushing defeat of daily life and the underlying joys that go along with it (sometimes).",
   ogDescription: 'Return of the Living Dad is a parent blog centered on life with two (difficult) kids. It focuses on the relentless crushing defeat of daily life and the underlying joys that go along with it (sometimes).',
   ogTitle: 'Return of the Living Dad | About',
-  ogImage: 'https://source.unsplash.com/1200x600?paint,splatter,abstract',
-  twitterCard: 'https://source.unsplash.com/1200x600?paint,splatter,abstract',
+  ogImage: getImageUrl('zombie','jpeg'),
+  twitterCard: getImageUrl('zombie','jpeg'),
 })
 
 // image paths

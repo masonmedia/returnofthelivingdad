@@ -13,6 +13,11 @@ const { isLoaded } = useImageLoader();
 const route = useRoute();
 const router = useRouter();
 
+// image paths
+function getImageUrl(name, ext) {
+  return new URL(`../assets/img/${name}.${ext}`, import.meta.url).href
+}
+
 // const postId = parseInt(route.params.id)
 
 // let isPublished = posts.blog.every(obj => obj.published === 'true');
@@ -46,8 +51,8 @@ useSeoMeta({
   description: "Return of the Living Dad is a parent blog centered on life with two (difficult) kids. It focuses on the relentless crushing defeat of daily life and the underlying joys that go along with it (sometimes).",
   ogDescription: 'Return of the Living Dad is a parent blog centered on life with two (difficult) kids. It focuses on the relentless crushing defeat of daily life and the underlying joys that go along with it (sometimes).',
   ogTitle: 'Return of the Living Dad',
-  ogImage: 'https://images.unsplash.com/photo-1637858868799-7f26a0640eb6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80',
-  twitterCard: 'https://images.unsplash.com/photo-1637858868799-7f26a0640eb6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80',
+  ogImage: getImageUrl('zombie','jpeg'),
+  twitterCard: getImageUrl('zombie','jpeg'),
 })
 
 // const description = ref('My amazing site.')
