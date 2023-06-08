@@ -135,6 +135,11 @@ function postIntro(arr) {
   return firstSentence;
 }
 
+// reduce length of post description to closest full word
+function shorten(text, max) {
+  return text && text.length > max ? text.slice(0, max).split(' ').slice(0, -1).join(' ') : text
+}
+
 // get first two sentences for latest post descriptions
 function postDescription(arr) {
   const sentences = arr.match(/[^\.!\?]+[\.!\?]+/g);
@@ -278,7 +283,7 @@ onMounted(() => {
                   <h5>{{ item.date }}</h5>
                   <!-- <p> {{ item.published }}</p> -->
                   <h2 class="fs-1 ls-base mb-3">{{ item.title }}</h2>
-                  <div class="mb-0" v-html="postDescription(item.body)"></div>
+                  <div class="mb-0" v-html="shorten(item.body, 150) + '...'"></div>
                   <router-link :to="'/' + item.id + '/' + item.slug">
                     <button class="btn btn-sm btn-dark px-4 rounded-3">Read</button>
                   </router-link>

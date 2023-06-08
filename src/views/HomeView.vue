@@ -128,7 +128,7 @@ function oddOrEven(arr) {
                   <h5>{{ post.date }}</h5>
                   <h2 class="fs-1 ls-base mb-3">{{ post.title }}</h2>
                   <!-- <div v-html="postDescription(post.body)"></div> -->
-                  <div v-html="shorten(post.body, 175) + '...'"></div>
+                  <div v-html="shorten(post.body, 150) + '...'"></div>
                   <router-link :to="'/' + post.id + '/' + post.slug">
                     <button class="btn btn-dark px-4 rounded-3">More</button>
                   </router-link>
