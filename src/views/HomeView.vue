@@ -83,7 +83,6 @@ function oddOrEven(arr) {
           <div class="row">
             <!-- about -->
             <div class="col-lg-12 pt-5">
-                <!-- <h2 class="display-2 fw-bold lh-1 ls-1 border-bottom border-dark p-2 py-4">About ROTLD</h2> -->
                 <h2 class="display-2 fw-bold lh-1 ls-1 border-bottom border-warning my-4 p-2 pb-4" style="color: #FFCC00; -webkit-text-stroke: 1px #000; filter: drop-shadow(5px 5px 1px #000);">About ROLTD</h2>
             </div>
           </div>
@@ -117,7 +116,7 @@ function oddOrEven(arr) {
             <!-- check if post is published -->
             <!-- :class="oddOrEven(postWithId) ? 'col-lg-4 col-md-6' : 'col-lg-6'" -->
             <div 
-            class="col-lg-4 col-md-6 p-0" v-for="(post, index) in postWithId" :key="index" 
+            class="col-lg-4 col-md-6 p-0" v-for="(post, index) in postWithId.slice(0,6)" :key="index" 
             v-show="post.published === 'true' && post.published !== '' && post.slug !== 'the-genesis'">
               <div class="m-2 bg-dark rounded-3 shadow position-relative">
                 <TransitionGroup name="fade">

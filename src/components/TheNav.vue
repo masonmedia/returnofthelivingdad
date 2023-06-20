@@ -18,7 +18,7 @@
                     <img style="width: 45px;" :src="getImageUrl('rld_logo_trans', 'png')" alt="">
                 </router-link>
                 <ul class="nav justify-content-end fs-5">
-                    <router-link class="nav-link" v-for="(route, index) in router.options.routes.slice(0,2)" :key="index"
+                    <router-link class="nav-link" v-for="(route, index) in router.options.routes.slice(0,3)" :key="index"
                     :to="route.path">
                         {{ route.name }}
                     </router-link>
@@ -29,7 +29,6 @@
 
         <div class="offcanvas offcanvas-end border-bottom w-100 font-antonio bg-dark text-warning" tabindex="-1" id="offcanvasResponsive" aria-labelledby="offcanvasRightLabel">
             <div class="offcanvas-header">
-                <!-- <h5 class="offcanvas-title font-antonio fw-bold ls-base fs-2">ROTLD</h5> -->
                 <img style="width: 45px;" class="pt-1" :src="getImageUrl('rld_logo_trans', 'png')" alt="">
                 <button class="btn pt-0 pe-0" role="button" data-bs-dismiss="offcanvas" aria-label="Close">
                     <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="text-warning bi bi-x-lg" viewBox="0 0 16 16">
@@ -41,7 +40,7 @@
                 <ul class="nav">
                     <li class="lh-1 ls-1 fw-900"
                     data-bs-dismiss="offcanvas">
-                        <router-link class="nav-link text-uppercase pb-1" v-for="(route, index) in router.options.routes.slice(0,2)" :key="index"
+                        <router-link class="nav-link text-uppercase pb-1" v-for="(route, index) in router.options.routes.slice(0,3)" :key="index"
                         :to="route.path">
                             {{ route.name }}
                         </router-link>
@@ -56,7 +55,7 @@
 
 <script setup>
 
-import { useRoute, useRouter } from "vue-router";
+import { useRouter } from "vue-router";
 // const location = useRoute();
 const router = useRouter();
 
