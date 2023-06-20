@@ -42,10 +42,13 @@ const postWithId = computed(() => {
     <Layout>
       <div class="container-fluid" :style="{'background' : 'url('+ getImageUrl('splatter_yellow', 'png') +') center center no-repeat', 'background-size' : 'cover'}">
         <div class="row min-vh-100 mt-3 mt-lg-5" :style="{'background' : 'url('+ getImageUrl('splatter_yellow', 'png') +') center 10% no-repeat'}">
-          <div class="col-lg-12 d-flex flex-column text-center my-auto p-5">
+          <div class="col-lg-12 d-flex flex-column justify-content-center align-items-center text-center my-auto p-5">
             <h5 class="h4 fw-bold mt-5 mt-lg-0">Return of the Living Dad</h5>
             <h1 class="text-uppercase" style="-webkit-text-stroke: 1px #FFCC00; filter: drop-shadow(5px 5px 1px goldenrod); line-height: 0.8; letter-spacing: -5px; font-weight: 900; font-size: 26vmin;">Posts</h1>
             <p class="h4 fw-bold mt-4 pt-2 ls-base">I'm a Dad. Yes, it is like a Zombie movie. <br>These are my stories.</p>
+            <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" fill="currentColor" class="bi bi-chevron-down text-dark mt-3" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+            </svg>
           </div>
         </div>
 
